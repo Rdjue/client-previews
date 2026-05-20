@@ -38,7 +38,7 @@ client-previews/
 ## Common tasks
 
 ### Process the upload inbox (`_inbox/`) — preferred intake path
-This repo uses a centralized upload workflow. Each client project is drafted in its own conversation, which drops output into `_inbox/<code>/` (HTML files + a `meta.yml`). This conversation is the single upload manager. Full spec: `HANDOFF.md`.
+This repo uses a centralized upload workflow. Each client project is drafted in its own conversation (pointed at `DELIVERY.md`), which drops output into `_inbox/<code>/` (HTML files + a `meta.yml`). This conversation is the single upload manager. Workflow overview: `HANDOFF.md`. Drafting-side spec + technical constraints + meta.yml format: `DELIVERY.md` (the validation checklist in step 3 below is defined there).
 
 When the user says **"處理 inbox"** (or "process inbox", optionally for one `<code>`):
 1. List `_inbox/` project folders, skipping `_TEMPLATE` and `README.md`.

@@ -9,7 +9,7 @@
 3. 在同資料夾放一個 `meta.yml`,格式見 [`_TEMPLATE/meta.yml`](_TEMPLATE/meta.yml)。
 4. **不要碰 git**(不 add / 不 commit / 不 push)。完成後告訴使用者代號即可。
 
-技術規範(單一自含檔、禁用 localStorage/sessionStorage、只用公開 CDN 等)見 repo 根目錄的 [`../HANDOFF.md`](../HANDOFF.md)。
+規劃對話的完整指示(交付步驟 + 技術規範 + `meta.yml` 格式)見 repo 根目錄的 [`../DELIVERY.md`](../DELIVERY.md)。整體流程概覽見 [`../HANDOFF.md`](../HANDOFF.md)。
 
 完成後的結構範例:
 

@@ -8,25 +8,20 @@
 規劃對話 C ─┘     (HTML + meta.yml)      驗證 / notes / README / commit / push
 ```
 
+## 使用者只需記兩句話
+
+| 對象 | 你說的話 |
+|------|----------|
+| **新的規劃 / 提案對話** | 「現在要進行提案交付,請依 `D:\Dropbox\telluswork\client-previews\DELIVERY.md` 的文件說明進行。」 |
+| **上傳對話**(本 repo 的維運對話) | 「**處理 inbox**」(或「處理 inbox 的 `<代號>`」) |
+
 ---
 
 ## A. 給「規劃對話」的指示
 
-提案定案後,規劃對話只需做 4 件事(**不要碰 git**):
+規劃對話該做的事,全部寫在 **[`DELIVERY.md`](DELIVERY.md)**(一份自足文件:交付步驟 + 技術規範 + `meta.yml` 格式)。把新的提案對話指向那份文件即可,不必在這裡重複。
 
-1. 在 `D:\Dropbox\telluswork\client-previews\_inbox\<代號>\` 建資料夾(代號:英文小寫 3–10 字,不含空格/底線/中文)。
-2. 把所有 HTML 存進去;**必須有一個 `index.html`** 當落地頁,並用相對連結指向其他 HTML(例 `<a href="wireframe.html">`)。
-3. 同資料夾放一個 `meta.yml`,格式見 `_inbox/_TEMPLATE/meta.yml`。
-4. 完成後告訴使用者代號即可。
-
-### 可直接貼給規劃對話的一行指示
-
-```
-提案定案後,請把所有 HTML 存到 D:\Dropbox\telluswork\client-previews\_inbox\<代號>\,
-並在同資料夾放一個 meta.yml(格式見該路徑下 _TEMPLATE\meta.yml)。
-務必有一個 index.html 當落地頁、用相對連結指向其他 HTML。
-技術規範見 client-previews\HANDOFF.md 的「C. 技術規範」。不要碰 git,完成後告訴我代號。
-```
+重點摘要:規劃對話完成後,把所有 HTML(含一個 `index.html` 落地頁)+ 一個 `meta.yml` 放進 `_inbox/<代號>/`,**不碰 git**。
 
 ---
 
@@ -51,33 +46,8 @@
 
 ---
 
-## C. 技術規範(每個 HTML 都須符合)
+## C. 技術規範與 meta.yml 格式
 
-- 單一檔案自含:所有 CSS / JS inline 在該 HTML 裡(不依賴 sibling .css / .js)。
-- 不可使用 `localStorage` / `sessionStorage`(跨主機會壞)。
-- 外部資源只能引用公開 CDN:Google Fonts、jsDelivr、cdnjs。
-- 不可使用需要 build 的格式(JSX 原始碼、TypeScript、SCSS 等);要用 React/Vue 請走 CDN production build。
-- 必須 RWD,桌機 / 平板 / 手機皆正常。
-- 中文字型用 Noto Sans TC / Noto Serif TC 或同等繁中字型。
-- 圖片佔位用公開 placeholder(例 https://placehold.co/),不要把 base64 大圖塞進檔案。
-- 編碼存成 UTF-8(無 BOM),檔尾不要有多餘 null byte。
+技術規範(單一自含檔、禁用 localStorage/sessionStorage、只用公開 CDN、RWD、UTF-8 無 BOM 等)與 `meta.yml` 欄位格式,以 **[`DELIVERY.md`](DELIVERY.md)** 為唯一準據,避免兩處重複維護而產生落差。`meta.yml` 範本另見 `_inbox/_TEMPLATE/meta.yml`。
 
----
-
-## meta.yml 範例
-
-```yaml
-代號: muan
-類型: 更新            # 新案 / 更新
-客戶名稱: 沐恩動物醫院  # 新案必填;更新可省略
-聯絡人: 林文傑          # 新案必填;更新可省略
-email: jakelinvet@gmail.com
-版本: v1.2
-日期: 2026-05-21
-狀態: 進行中            # 新案用;更新可省略
-變更摘要:
-  - 修正首頁 banner 文案
-檔案說明:
-  index.html: 提案說明與導覽(落地頁)
-  wireframe.html: 可點擊的互動式 Wireframe 原型
-```
+上傳對話在驗證階段,以 `DELIVERY.md` 的「技術規範」為檢查清單。

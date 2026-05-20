@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>沐恩動物醫院 官網改版規劃提案</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --teal:#1f8a8a;
+    --teal-dark:#0f6b6b;
+    --teal-light:#e6f4f4;
+    --sand:#f7f4ee;
+    --ink:#222a30;
+    --grey:#5f6b75;
+    --line:#d8dee0;
+    --amber:#e0a93b;
+    --white:#ffffff;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{
+    font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;
+    color:var(--ink);
+    background:var(--sand);
+    line-height:1.9;
+    font-size:18px;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:1280px;margin:0 auto;padding:0 64px;}
+  /* ---- hero ---- */
+  .hero{
+    background:linear-gradient(135deg,var(--teal) 0%,var(--teal-dark) 100%);
+    color:#fff;padding:100px 0 84px;
+  }
+  .hero .wrap{display:flex;flex-direction:column;gap:8px;}
+  .hero .eyebrow{font-size:16px;letter-spacing:5px;opacity:.85;}
+  .hero h1{font-size:52px;font-weight:800;letter-spacing:1px;margin-top:14px;line-height:1.3;}
+  .hero .sub{font-size:22px;opacity:.94;margin-top:12px;}
+  .hero .meta{
+    display:flex;flex-wrap:wrap;gap:48px;margin-top:44px;
+    font-size:16px;opacity:.96;border-top:1px solid rgba(255,255,255,.28);padding-top:28px;
+  }
+  .hero .meta b{display:block;font-size:13px;opacity:.72;letter-spacing:1.5px;font-weight:500;margin-bottom:2px;}
+  /* ---- sections ---- */
+  section{padding:76px 0;border-bottom:1px solid var(--line);}
+  section:last-of-type{border-bottom:none;}
+  .sec-num{
+    display:inline-block;font-size:15px;font-weight:700;color:var(--teal);
+    letter-spacing:3px;margin-bottom:10px;
+  }
+  h2{font-size:38px;font-weight:800;margin-bottom:12px;line-height:1.35;}
+  h2 + .lead{color:var(--grey);font-size:19px;margin-bottom:36px;}
+  h3{font-size:24px;font-weight:700;margin:38px 0 16px;color:var(--teal-dark);}
+  h4.blk{font-size:21px;font-weight:700;margin:34px 0 14px;color:var(--ink);}
+  p{margin-bottom:16px;}
+  /* ---- cards ---- */
+  .grid{display:grid;gap:24px;}
+  .g2{grid-template-columns:1fr 1fr;}
+  .g3{grid-template-columns:1fr 1fr 1fr;}
+  .card{
+    background:#fff;border:1px solid var(--line);border-radius:16px;
+    padding:30px 32px;
+  }
+  .card h4{font-size:20px;font-weight:700;margin-bottom:10px;color:var(--ink);}
+  .card p{font-size:16.5px;color:var(--grey);margin:0;}
+  .card .ic{
+    width:52px;height:52px;border-radius:13px;background:var(--teal-light);
+    display:flex;align-items:center;justify-content:center;margin-bottom:18px;
+  }
+  /* ---- callout ---- */
+  .callout{
+    background:var(--teal-light);border-left:5px solid var(--teal);
+    border-radius:10px;padding:24px 30px;font-size:17.5px;color:var(--teal-dark);
+    margin:28px 0;
+  }
+  .note{
+    background:#fdf6e7;border-left:5px solid var(--amber);
+    border-radius:10px;padding:24px 30px;font-size:17.5px;color:#8a6a1f;margin:28px 0;
+  }
+  /* ---- table ---- */
+  table{width:100%;border-collapse:collapse;font-size:17px;background:#fff;
+    border-radius:14px;overflow:hidden;border:1px solid var(--line);}
+  th{background:var(--teal);color:#fff;text-align:left;padding:16px 20px;font-weight:600;}
+  td{padding:15px 20px;border-top:1px solid var(--line);color:var(--ink);vertical-align:top;}
+  tr:nth-child(even) td{background:#faf9f6;}
+  /* ---- ref links ---- */
+  .reflist{display:flex;flex-direction:column;gap:0;margin-top:8px;}
+  .ref{display:flex;gap:20px;padding:22px 0;border-bottom:1px dashed var(--line);align-items:flex-start;}
+  .ref:last-child{border-bottom:none;}
+  .ref .tag{
+    flex:none;font-size:14px;font-weight:700;color:#fff;background:var(--teal);
+    padding:6px 16px;border-radius:24px;height:fit-content;
+  }
+  .ref .tag.b{background:var(--amber);}
+  .ref a{color:var(--teal-dark);font-weight:700;text-decoration:none;font-size:19px;}
+  .ref p{font-size:16.5px;color:var(--grey);margin:4px 0 0;}
+  /* ---- flow (no time) ---- */
+  .flow{display:flex;flex-direction:column;gap:0;margin-top:14px;}
+  .flow-row{display:flex;gap:26px;align-items:flex-start;}
+  .flow-rail{display:flex;flex-direction:column;align-items:center;flex:none;width:48px;}
+  .flow-num{width:48px;height:48px;border-radius:50%;background:var(--teal);color:#fff;
+    display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:800;flex:none;}
+  .flow-num.last{background:var(--amber);}
+  .flow-line{width:3px;flex:1;background:var(--line);min-height:30px;margin:4px 0;}
+  .flow-body{padding-bottom:30px;padding-top:6px;}
+  .flow-body h4{font-size:21px;font-weight:700;margin:0 0 4px;}
+  .flow-body p{font-size:16.5px;color:var(--grey);margin:0;}
+  /* ---- quote box ---- */
+  .quote-box{
+    background:#fff;border:2px dashed var(--teal);border-radius:18px;
+    padding:48px;text-align:center;
+  }
+  .quote-box .lbl{font-size:16px;color:var(--grey);letter-spacing:2px;}
+  .quote-box .url{
+    display:inline-block;margin-top:16px;font-size:21px;font-weight:700;
+    color:var(--teal-dark);background:var(--teal-light);padding:18px 40px;border-radius:12px;
+    word-break:break-all;
+  }
+  .quote-box .hint{font-size:16px;color:var(--grey);margin-top:18px;}
+  /* ---- footer ---- */
+  .footer{background:var(--ink);color:#cfd6dc;padding:56px 0;font-size:16px;}
+  .footer b{color:#fff;font-size:14px;letter-spacing:1px;}
+  .footer .row{display:flex;flex-wrap:wrap;gap:64px;}
+  .footer .row > div{line-height:1.9;}
+  /* ---- figure ---- */
+  .figure{background:#fff;border:1px solid var(--line);border-radius:16px;
+    padding:36px;margin:28px 0;}
+  .figure .cap{font-size:15.5px;color:var(--grey);text-align:center;margin-top:16px;}
+  .figure .ftitle{font-size:19px;font-weight:700;color:var(--teal-dark);margin-bottom:6px;}
+  .svg-scroll{display:block;width:100%;}
+  .card .ic .svg-scroll{display:contents;}
+  svg{display:block;width:100%;height:auto;}
+  ul.clean{list-style:none;margin:12px 0;}
+  ul.clean li{position:relative;padding-left:30px;font-size:17.5px;margin-bottom:11px;color:var(--ink);}
+  ul.clean li::before{content:"";position:absolute;left:6px;top:14px;width:9px;height:9px;
+    border-radius:50%;background:var(--teal);}
+  .wf-legend{display:flex;flex-wrap:wrap;gap:24px;margin:20px 0 4px;font-size:14.5px;color:var(--grey);}
+  .wf-legend span{display:flex;align-items:center;gap:8px;}
+  .wf-legend i{width:18px;height:14px;border-radius:3px;display:inline-block;}
+  @media(max-width:860px){
+    body{font-size:16px;line-height:1.85;}
+    .wrap{padding:0 20px;}
+    .g2,.g3{grid-template-columns:1fr;}
+    .hero{padding:60px 0 48px;}
+    .hero .eyebrow{font-size:12px;letter-spacing:2px;}
+    .hero h1{font-size:30px;margin-top:10px;}
+    .hero .sub{font-size:17px;}
+    .hero .meta{gap:18px 28px;margin-top:28px;padding-top:20px;font-size:14px;}
+    section{padding:44px 0;}
+    .sec-num{font-size:13px;letter-spacing:2px;}
+    h2{font-size:25px;}
+    h2 + .lead{font-size:16px;margin-bottom:24px;}
+    h3{font-size:20px;margin:28px 0 14px;}
+    h4.blk{font-size:18px;}
+    .card{padding:22px;border-radius:13px;}
+    .card h4{font-size:18px;}
+    .card p{font-size:15.5px;}
+    .card .ic{width:46px;height:46px;}
+    .callout,.note{font-size:15.5px;padding:18px 20px;}
+    .figure{padding:16px;border-radius:12px;position:relative;}
+    .figure::before{
+      content:"\2190  左右滑動可檢視完整圖表  \2192";
+      display:block;font-size:12.5px;color:var(--teal);font-weight:700;
+      text-align:center;margin-bottom:10px;letter-spacing:.5px;
+    }
+    .figure .ftitle{font-size:17px;}
+    .figure .cap{font-size:14px;}
+    .svg-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;}
+    .figure .svg-scroll svg{min-width:820px;}
+    .reflist .ref{gap:14px;padding:18px 0;}
+    .ref a{font-size:17px;}
+    .ref p{font-size:15.5px;}
+    .ref .tag{font-size:13px;padding:5px 12px;}
+    .wf-legend{gap:12px 18px;font-size:13px;}
+    .flow-row{gap:18px;}
+    .flow-rail{width:40px;}
+    .flow-num{width:40px;height:40px;font-size:17px;}
+    .flow-body h4{font-size:18px;}
+    .flow-body p{font-size:15.5px;}
+    ul.clean li{font-size:15.5px;padding-left:26px;}
+    .quote-box{padding:28px 18px;border-radius:14px;}
+    .quote-box .url{font-size:15px;padding:14px 18px;}
+    .quote-box .hint{font-size:14px;}
+    .footer{padding:40px 0;}
+    .footer .row{gap:24px;}
+  }
+</style>
+</head>
+<body>
+
+<!-- ============ HERO ============ -->
+<div class="hero">
+  <div class="wrap">
+    <span class="eyebrow">WEBSITE PROPOSAL ‧ 官網改版規劃提案</span>
+    <h1>沐恩動物醫院 官方網站改版</h1>
+    <div class="sub">以清楚、好找、現代化的資訊型網站，重新打造醫院的線上門面</div>
+    <div class="meta">
+      <div><b>提案對象</b>沐恩動物醫院　林文傑 醫師</div>
+      <div><b>現有網站</b>www.muanamc.tw</div>
+      <div><b>提案日期</b>2026 / 05 / 14</div>
+      <div><b>提案單位</b>Tellustek</div>
+    </div>
+  </div>
+</div>
+
+<!-- ============ 1. 專案背景與目標 ============ -->
+<section>
+  <div class="wrap">
+    <span class="sec-num">01 ‧ 專案背景與目標</span>
+    <h2>重點需求</h2>
+    <p class="lead">根據 2026/05/14 第一次會議，沐恩動物醫院希望以現有網站為基礎進行改版，重點不在花俏功能，而在「資訊清楚、好找」。</p>
+
+    <div class="grid g3">
+      <div class="card">
+        <div class="ic">
+          <div class="svg-scroll"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#1f8a8a" stroke-width="2"><path d="M3 7h18M3 12h18M3 17h12"/></svg></div>
+        </div>
+        <h4>純資訊呈現網站</h4>
+        <p>單一繁體中文，主要傳達最新消息、醫療團隊、衛教文章、院所公告等資訊，不需線上預約功能（採電話預約）。</p>
+      </div>
+      <div class="card">
+        <div class="ic">
+          <div class="svg-scroll"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#1f8a8a" stroke-width="2"><path d="M12 3v18M3 8l9-5 9 5M5 21h14"/></svg></div>
+        </div>
+        <h4>現代化排版與導覽</h4>
+        <p>參考 egah.com.tw 的現代排版，以及 jsah.com.tw 的快速導覽體驗，讓訪客一眼找到要的內容。</p>
+      </div>
+      <div class="card">
+        <div class="ic">
+          <div class="svg-scroll"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#1f8a8a" stroke-width="2"><rect x="3" y="4" width="18" height="14" rx="2"/><path d="M8 21h8M12 18v3"/></svg></div>
+        </div>
+        <h4>WordPress 後台</h4>
+        <p>採用 WordPress 作為後台，院方可自行更新文章、新聞、衛教與公告，長期維運不需工程介入。</p>
+      </div>
+    </div>
+
+    <div class="callout">
+      <b>核心設計原則：</b>資訊清楚好找 ＞ 視覺花俏。每一個版面決策都回到「飼主能不能快速找到答案」這個問題。
+    </div>
+  </div>
+</section>
+
+<!-- ============ 2. 現況分析 ============ -->
+<section>
+  <div class="wrap">
+    <span class="sec-num">02 ‧ 現況分析</span>
+    <h2>從現有網站出發</h2>
+    <p class="lead">改版以 www.muanamc.tw 既有內容為基底，保留有效資產、補強體驗缺口。</p>
+
+    <div class="figure">
+      <div class="svg-scroll"><svg viewBox="0 0 1100 250" xmlns="http://www.w3.org/2000/svg">
+        <rect x="20" y="30" width="470" height="190" rx="14" fill="#fdf6e7" stroke="#e0a93b" stroke-width="1.5"/>
+        <text x="255" y="66" text-anchor="middle" font-size="20" font-weight="700" fill="#8a6a1f">現有網站現況</text>
+        <text x="56" y="106" font-size="16" fill="#8a6a1f">‧ 內容已具基礎，但排版較舊、不夠現代</text>
+        <text x="56" y="138" font-size="16" fill="#8a6a1f">‧ 行動裝置瀏覽體驗有提升空間</text>
+        <text x="56" y="170" font-size="16" fill="#8a6a1f">‧ 資訊分類與導覽動線可再優化</text>
+        <text x="56" y="202" font-size="16" fill="#8a6a1f">‧ 後台更新彈性有限</text>
+        <path d="M500 125 L600 125" stroke="#1f8a8a" stroke-width="3.5" marker-end="url(#ah)"/>
+        <defs><marker id="ah" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto">
+          <path d="M0 0 L10 5 L0 10 z" fill="#1f8a8a"/></marker></defs>
+        <text x="550" y="112" text-anchor="middle" font-size="15" font-weight="700" fill="#1f8a8a">改版</text>
+        <rect x="610" y="30" width="470" height="190" rx="14" fill="#e6f4f4" stroke="#1f8a8a" stroke-width="1.5"/>
+        <text x="845" y="66" text-anchor="middle" font-size="20" font-weight="700" fill="#0f6b6b">改版後目標</text>
+        <text x="646" y="106" font-size="16" fill="#0f6b6b">‧ 現代化視覺與一致的版型系統</text>
+        <text x="646" y="138" font-size="16" fill="#0f6b6b">‧ 全站 RWD，手機 / 平板 / 桌機皆順暢</text>
+        <text x="646" y="170" font-size="16" fill="#0f6b6b">‧ 清晰的資訊架構與快速導覽</text>
+        <text x="646" y="202" font-size="16" fill="#0f6b6b">‧ WordPress 後台，院方可自助更新</text>
+      </svg></div>
+      <div class="cap">圖一：現況與改版後目標對照</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 3. 網站架構建議 ============ -->
+<section>
+  <div class="wrap">
+    <span class="sec-num">03 ‧ 網站架構建議</span>
+    <h2>建議的網站架構（Sitemap）</h2>
+    <p class="lead">以現有網站內容為基礎重新分類，將「最新消息」與「寵物衛教」獨立成清楚的內容區塊，方便長期累積與查找。</p>
+
+    <div class="figure">
+      <div class="svg-scroll"><svg viewBox="0 0 1200 540" xmlns="http://www.w3.org/2000/svg">
+        <!-- 首頁 -->
+        <rect x="500" y="16" width="200" height="54" rx="12" fill="#1f8a8a"/>
+        <text x="600" y="50" text-anchor="middle" font-size="20" font-weight="700" fill="#fff">首頁 Home</text>
+
+        <!-- 連接：首頁 -> bus -> 5 欄 -->
+        <path d="M600 70 L600 104" stroke="#9cc4c4" stroke-width="2.5" fill="none"/>
+        <path d="M144 104 L1056 104" stroke="#9cc4c4" stroke-width="2.5" fill="none"/>
+        <path d="M144 104 L144 128 M372 104 L372 128 M600 104 L600 128 M828 104 L828 128 M1056 104 L1056 128"
+              stroke="#9cc4c4" stroke-width="2.5" fill="none"/>
+
+        <!-- 5 主選單 -->
+        <g font-size="17" font-weight="700">
+          <rect x="54" y="128" width="180" height="48" rx="10" fill="#e6f4f4" stroke="#1f8a8a" stroke-width="1.5"/>
+          <text x="144" y="158" text-anchor="middle" fill="#0f6b6b">關於沐恩</text>
+          <rect x="282" y="128" width="180" height="48" rx="10" fill="#e6f4f4" stroke="#1f8a8a" stroke-width="1.5"/>
+          <text x="372" y="158" text-anchor="middle" fill="#0f6b6b">醫療團隊</text>
+          <rect x="510" y="128" width="180" height="48" rx="10" fill="#e6f4f4" stroke="#1f8a8a" stroke-width="1.5"/>
+          <text x="600" y="158" text-anchor="middle" fill="#0f6b6b">診療服務</text>
+          <rect x="738" y="128" width="180" height="48" rx="10" fill="#e6f4f4" stroke="#1f8a8a" stroke-width="1.5"/>
+          <text x="828" y="158" text-anchor="middle" fill="#0f6b6b">最新消息</text>
+          <rect x="966" y="128" width="180" height="48" rx="10" fill="#e6f4f4" stroke="#1f8a8a" stroke-width="1.5"/>
+          <text x="1056" y="158" text-anchor="middle" fill="#0f6b6b">寵物衛教</text>
+        </g>
+
+        <!-- 子項目：每欄一條左側直線 spine + 直角分支 -->
+        <g font-size="14.5" fill="#5f6b75">
+          <!-- 關於沐恩 spine x=74 -->
+          <path d="M74 176 L74 335" stroke="#cdd6d8" stroke-width="2"/>
+          <path d="M74 209 L86 209 M74 251 L86 251 M74 293 L86 293 M74 335 L86 335" stroke="#cdd6d8" stroke-width="2"/>
+          <rect x="86" y="192" width="150" height="34" rx="7" fill="#fff" stroke="#d8dee0"/><text x="161" y="214" text-anchor="middle">醫院介紹</text>
+          <rect x="86" y="234" width="150" height="34" rx="7" fill="#fff" stroke="#d8dee0"/><text x="161" y="256" text-anchor="middle">環境與設備</text>
+          <rect x="86" y="276" width="150" height="34" rx="7" fill="#fff" stroke="#d8dee0"/><text x="161" y="298" text-anchor="middle">看診時間</text>
+          <rect x="86" y="318" width="150" height="34" rx="7" fill="#fff" stroke="#d8dee0"/><text x="161" y="340" text-anchor="middle">交通資訊</text>
+
+          <!-- 醫療團隊 spine x=302 -->
+          <path d="M302 176 L302 251" stroke="#cdd6d8" stroke-width="2"/>
+          <path d="M302 209 L314 209 M302 251 L314 251" stroke="#cdd6d8" stroke-width="2"/>
+          <rect x="314" y="192" width="150" height="34" rx="7" fill="#fff" stroke="#d8dee0"/><text x="389" y="214" text-anchor="middle">醫師列表</text>
+          <rect x="314" y="234" width="150" height="34" rx="7" fill="#fff" stroke="#d8dee0"/><text x="389" y="256" text-anchor="middle">醫師介紹頁</text>
+
+          <!-- 診療服務 spine x=530 -->
+          <path d="M530 176 L530 419" stroke="#cdd6d8" stroke-width="2"/>
+          <path d="M530 209 L542 209 M530 251 L542 251 M530 293 L542 293 M530 335 L542 335 M530 377 L542 377 M530 419 L542 419" stroke="#cdd6d8" stroke-width="2"/>
+          <rect x="542" y="192" width="150" height="34" rx="7" fill="#fff" stroke="#d8dee0"/><text x="617" y="214" text-anchor="middle">一般診療</text>
+          <rect x="542" y="234" width="150" height="34" rx="7" fill="#fff" stroke="#d8dee0"/><text x="617" y="256" text-anchor="middle">預防保健</text>
+          <rect x="542" y="276" width="150" height="34" rx="7" fill="#fff" stroke="#d8dee0"/><text x="617" y="298" text-anchor="middle">外科手術</text>
+          <rect x="542" y="318" width="150" height="34" rx="7" fill="#fff" stroke="#d8dee0"/><text x="617" y="340" text-anchor="middle">健康檢查</text>
+          <rect x="542" y="360" width="150" height="34" rx="7" fill="#fff" stroke="#d8dee0"/><text x="617" y="382" text-anchor="middle">影像與檢驗</text>
+          <rect x="542" y="402" width="150" height="34" rx="7" fill="#fff" stroke="#d8dee0"/><text x="617" y="424" text-anchor="middle">住院照護</text>
+
+          <!-- 最新消息 spine x=758 -->
+          <path d="M758 176 L758 251" stroke="#cdd6d8" stroke-width="2"/>
+          <path d="M758 209 L770 209 M758 251 L770 251" stroke="#cdd6d8" stroke-width="2"/>
+          <rect x="770" y="192" width="150" height="34" rx="7" fill="#fff" stroke="#d8dee0"/><text x="845" y="214" text-anchor="middle">消息列表</text>
+          <rect x="770" y="234" width="150" height="34" rx="7" fill="#fff" stroke="#d8dee0"/><text x="845" y="256" text-anchor="middle">消息內頁</text>
+
+          <!-- 寵物衛教 spine x=986 -->
+          <path d="M986 176 L986 251" stroke="#cdd6d8" stroke-width="2"/>
+          <path d="M986 209 L998 209 M986 251 L998 251" stroke="#cdd6d8" stroke-width="2"/>
+          <rect x="998" y="192" width="150" height="34" rx="7" fill="#fff" stroke="#d8dee0"/><text x="1073" y="214" text-anchor="middle">衛教文章列表</text>
+          <rect x="998" y="234" width="150" height="34" rx="7" fill="#fff" stroke="#d8dee0"/><text x="1073" y="256" text-anchor="middle">衛教文章內頁</text>
+        </g>
+
+        <!-- 全站固定資訊 -->
+        <rect x="340" y="462" width="520" height="56" rx="12" fill="#fdf6e7" stroke="#e0a93b" stroke-width="1.5"/>
+        <text x="600" y="486" text-anchor="middle" font-size="16" font-weight="700" fill="#8a6a1f">全站固定區（頁首 / 頁尾）</text>
+        <text x="600" y="508" text-anchor="middle" font-size="14" fill="#8a6a1f">電話預約資訊 ‧ 看診時間 ‧ 地址地圖 ‧ 聯絡我們</text>
+      </svg></div>
+      <div class="cap">圖二：建議網站架構，與互動式 Wireframe 原型一致，共 5 大主選單 ＋ 全站固定的預約／聯絡資訊</div>
+    </div>
+
+    <div class="callout">
+      因採<b>電話預約</b>，不另做線上預約系統；改以「電話 ‧ 看診時間 ‧ 地圖」常駐於頁首與頁尾，讓飼主在任何頁面都能一鍵聯繫。
+    </div>
+  </div>
+</section>
+
+<!-- ============ 4. 後台 CMS 規劃 ============ -->
+<section>
+  <div class="wrap">
+    <span class="sec-num">04 ‧ 後台規劃（WordPress）</span>
+    <h2>以 WordPress 打造好維運的後台</h2>
+    <p class="lead">後台採用全球使用最廣的 WordPress 平台，介面親切、學習門檻低，院內同仁不需技術背景即可日常更新內容。</p>
+
+    <div class="figure">
+      <div class="svg-scroll"><svg viewBox="0 0 1100 280" xmlns="http://www.w3.org/2000/svg">
+        <rect x="20" y="24" width="270" height="232" rx="14" fill="#0f6b6b"/>
+        <text x="155" y="62" text-anchor="middle" font-size="19" font-weight="700" fill="#fff">WordPress 後台</text>
+        <g font-size="15" fill="#cfe6e6">
+          <text x="54" y="100">▸ 最新消息 / 公告</text>
+          <text x="54" y="132">▸ 寵物衛教文章</text>
+          <text x="54" y="164">▸ 醫師團隊資料</text>
+          <text x="54" y="196">▸ 診療服務內容</text>
+          <text x="54" y="228">▸ 首頁輪播 Banner</text>
+        </g>
+        <path d="M290 140 L360 140" stroke="#1f8a8a" stroke-width="3.5" marker-end="url(#ah2)"/>
+        <defs><marker id="ah2" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto">
+          <path d="M0 0 L10 5 L0 10 z" fill="#1f8a8a"/></marker></defs>
+        <g>
+          <rect x="380" y="30" width="330" height="104" rx="12" fill="#e6f4f4" stroke="#1f8a8a"/>
+          <text x="406" y="66" font-size="17" font-weight="700" fill="#0f6b6b">區塊編輯器</text>
+          <text x="406" y="94" font-size="14.5" fill="#0f6b6b">像打文件一樣編輯文章，可插入圖片、</text>
+          <text x="406" y="116" font-size="14.5" fill="#0f6b6b">標題、連結，所見即所得</text>
+
+          <rect x="730" y="30" width="350" height="104" rx="12" fill="#e6f4f4" stroke="#1f8a8a"/>
+          <text x="756" y="66" font-size="17" font-weight="700" fill="#0f6b6b">分類與上下架</text>
+          <text x="756" y="94" font-size="14.5" fill="#0f6b6b">文章可分類、設定發佈時間、</text>
+          <text x="756" y="116" font-size="14.5" fill="#0f6b6b">隨時上架或下架</text>
+
+          <rect x="380" y="148" width="330" height="104" rx="12" fill="#fdf6e7" stroke="#e0a93b"/>
+          <text x="406" y="184" font-size="17" font-weight="700" fill="#8a6a1f">媒體庫管理</text>
+          <text x="406" y="212" font-size="14.5" fill="#8a6a1f">圖片集中管理、自動最佳化尺寸，</text>
+          <text x="406" y="234" font-size="14.5" fill="#8a6a1f">維持網站載入速度</text>
+
+          <rect x="730" y="148" width="350" height="104" rx="12" fill="#fdf6e7" stroke="#e0a93b"/>
+          <text x="756" y="184" font-size="17" font-weight="700" fill="#8a6a1f">帳號與權限</text>
+          <text x="756" y="212" font-size="14.5" fill="#8a6a1f">可開設多組帳號，分別管理</text>
+          <text x="756" y="234" font-size="14.5" fill="#8a6a1f">不同內容區塊</text>
+        </g>
+      </svg></div>
+      <div class="cap">圖三：WordPress 後台功能模組概念圖</div>
+    </div>
+
+    <div class="note">
+      <b>為什麼選 WordPress：</b>市佔率高、社群資源豐富、後台中文介面成熟，未來若要擴充功能或更換維護廠商都相對容易，不會被單一廠商綁定。
+    </div>
+  </div>
+</section>
+
+<!-- ============ 5. 設計方向 ============ -->
+<section>
+  <div class="wrap">
+    <span class="sec-num">05 ‧ 設計方向</span>
+    <h2>視覺與體驗方向</h2>
+    <p class="lead">綜合會議中提到的兩個參考網站，定調本次改版的設計取向。</p>
+
+    <div class="reflist">
+      <div class="ref">
+        <span class="tag">排版參考</span>
+        <div>
+          <a href="https://www.egah.com.tw/" target="_blank">www.egah.com.tw</a>
+          <p>學習其<b>現代化排版</b>：大圖視覺、清楚的留白與層次、區塊化的資訊呈現。</p>
+        </div>
+      </div>
+      <div class="ref">
+        <span class="tag b">導覽參考</span>
+        <div>
+          <a href="https://www.jsah.com.tw/" target="_blank">www.jsah.com.tw</a>
+          <p>學習其<b>快速導覽</b>：選單動線直覺，訪客能很快點到想找的資訊。</p>
+        </div>
+      </div>
+    </div>
+
+    <h3>本案設計取向</h3>
+    <div class="grid g3">
+      <div class="card"><h4>專業且溫暖</h4><p>採用沉穩的醫療感色系搭配溫暖點綴，傳達專業同時不冰冷，符合動物醫院形象。</p></div>
+      <div class="card"><h4>資訊層次清楚</h4><p>以區塊化、卡片式設計呈現內容，標題與內文層次分明，掃讀即可掌握重點。</p></div>
+      <div class="card"><h4>行動優先 RWD</h4><p>多數飼主用手機瀏覽，全站響應式設計，手機上的選單與文章閱讀同樣順暢。</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 6. 頁面版面規劃 ============ -->
+<section>
+  <div class="wrap">
+    <span class="sec-num">06 ‧ 頁面版面規劃</span>
+    <h2>各頁面版面規劃</h2>
+    <p class="lead">為了更貼近實際瀏覽體驗，各頁面的 Wireframe 已獨立製作為「可點擊的互動式原型」，能直接切換頁面導覽，並支援桌機與手機 RWD 響應式檢視。</p>
+
+    <div class="callout">
+      <b>互動式 Wireframe 原型：</b>點擊下方按鈕即可開啟可操作的互動式原型，能點擊導覽列、卡片與文章列表實際操作，並縮放視窗檢視響應式效果。原型涵蓋首頁、關於沐恩、醫療團隊（含醫師個別介紹頁）、診療服務、最新消息（列表／內頁）、寵物衛教（列表／內頁）等頁面。
+    </div>
+
+    <div class="grid g3">
+      <div class="card"><h4>可點擊導覽</h4><p>導覽列、子選單、卡片、文章列表、麵包屑皆可點擊，完整模擬實際網站的瀏覽動線。</p></div>
+      <div class="card"><h4>RWD 響應式</h4><p>桌機為橫向導覽，手機自動切換為漢堡選單與單欄佈局，可縮放視窗即時測試。</p></div>
+      <div class="card"><h4>完整頁面架構</h4><p>依第 03 章的網站架構建置，涵蓋列表頁與文章內頁，呈現各頁面的區塊配置與層次。</p></div>
+    </div>
+
+    <div style="text-align:center;margin-top:40px;">
+      <a href="wireframe.html" target="_blank" style="display:inline-block;background:var(--teal);color:#fff;font-size:19px;font-weight:700;padding:18px 46px;border-radius:12px;text-decoration:none;">開啟互動式 Wireframe 原型 ›</a>
+    </div>
+
+  </div>
+</section>
+
+<!-- ============ 7. 專案執行流程 ============ -->
+<section>
+  <div class="wrap">
+    <span class="sec-num">07 ‧ 專案執行流程</span>
+    <h2>專案執行流程</h2>
+    <p class="lead">專案依下列步驟推進，每個階段完成並確認後再進入下一步。</p>
+
+    <div class="flow">
+      <div class="flow-row">
+        <div class="flow-rail"><div class="flow-num">1</div><div class="flow-line"></div></div>
+        <div class="flow-body"><h4>需求確認與簽約</h4><p>確認架構、功能範圍與報價內容，簽訂合約並啟動專案。</p></div>
+      </div>
+      <div class="flow-row">
+        <div class="flow-rail"><div class="flow-num">2</div><div class="flow-line"></div></div>
+        <div class="flow-body"><h4>網站架構與內容盤點</h4><p>確認 Sitemap，盤點需保留／新增的內容，列出素材清單。</p></div>
+      </div>
+      <div class="flow-row">
+        <div class="flow-rail"><div class="flow-num">3</div><div class="flow-line"></div></div>
+        <div class="flow-body"><h4>UI / UX 視覺設計</h4><p>產出首頁與主要內頁設計稿，與院方確認視覺方向後定稿。</p></div>
+      </div>
+      <div class="flow-row">
+        <div class="flow-rail"><div class="flow-num">4</div><div class="flow-line"></div></div>
+        <div class="flow-body"><h4>前端切版與 WordPress 後台建置</h4><p>RWD 響應式切版，同步建置 WordPress 後台與各內容模組。</p></div>
+      </div>
+      <div class="flow-row">
+        <div class="flow-rail"><div class="flow-num">5</div><div class="flow-line"></div></div>
+        <div class="flow-body"><h4>內容上架與資料轉移</h4><p>將舊站既有內容整理上架，協助院方熟悉後台操作。</p></div>
+      </div>
+      <div class="flow-row">
+        <div class="flow-rail"><div class="flow-num">6</div><div class="flow-line"></div></div>
+        <div class="flow-body"><h4>測試、網域移轉與正式上線</h4><p>跨裝置測試與修正，協助網域自中華電信移轉，正式上線。</p></div>
+      </div>
+      <div class="flow-row">
+        <div class="flow-rail"><div class="flow-num last">7</div></div>
+        <div class="flow-body"><h4>教育訓練與保固啟動</h4><p>後台操作教學、驗收，啟動第一年免費保固。</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 8. 主機 / 網域 ============ -->
+<section>
+  <div class="wrap">
+    <span class="sec-num">08 ‧ 主機與網域</span>
+    <h2>主機與網域安排</h2>
+    <p class="lead">主機空間與網域皆由我方提供與報價，院方無需自行處理技術細節。</p>
+
+    <div class="grid g2">
+      <div class="card">
+        <h4>主機空間（AWS 雲端）</h4>
+        <p>由我方在 AWS（Amazon Web Services）雲端平台建置穩定的網站主機環境，具備良好的效能、安全性與可靠度，確保網站正常連線運作。第一年費用列於報價單，第二年起為年度續費。</p>
+      </div>
+      <div class="card">
+        <h4>網域 muanamc.tw</h4>
+        <p>院方現有網域在中華電信，需辦理移轉。我方協助處理移轉作業，網域年費與移轉一併報價。</p>
+      </div>
+    </div>
+    <div class="note">
+      <b>說明：</b>第一年的網域與主機在報價單中以兩條獨立項目列出；第二年起的主機續費、網域續費亦會在報價單中一併載明，方便院方預先掌握年度成本。
+    </div>
+  </div>
+</section>
+
+<!-- ============ 9. 保固與維護 ============ -->
+<section>
+  <div class="wrap">
+    <span class="sec-num">09 ‧ 保固與維護</span>
+    <h2>保固與後續維護</h2>
+
+    <div class="grid g2">
+      <div class="card" style="border-color:var(--teal);border-width:2px;">
+        <h4 style="color:var(--teal-dark);">第一年 ‧ 免費保固</h4>
+        <p>網站上線後第一年提供免費保固，涵蓋程式正常運作、定期備份、必要更新、災難還原等，確保網站正常使用與連線。</p>
+      </div>
+      <div class="card">
+        <h4>第二年起 ‧ 年度保固維護</h4>
+        <p>第二年起的保固維護費為製作費的 15–20%／年，服務範圍與第一年相同。實際金額載明於報價單。</p>
+      </div>
+    </div>
+
+    <h3>保固涵蓋範圍</h3>
+    <ul class="clean">
+      <li>程式與功能正常運作的維護</li>
+      <li>網站資料定期備份</li>
+      <li>必要的系統與安全性更新</li>
+      <li>異常或災難情況下的還原處理</li>
+      <li>確保網站正常連線與使用</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ============ 10. 報價 ============ -->
+<section>
+  <div class="wrap">
+    <span class="sec-num">10 ‧ 報價</span>
+    <h2>報價明細</h2>
+    <p class="lead">完整報價項目與金額，請參閱以下連結之正式報價單。</p>
+
+    <div class="quote-box">
+      <div class="lbl">— 正式報價單 —</div>
+      <a class="url" href="https://quotation-system.tellustek.com/quotations/b847857f-664e-4420-a1e4-edb75629133f" target="_blank" style="text-decoration:none;">開啟正式報價單 ›</a>
+      <div class="hint">點擊上方連結即可開啟線上報價單，內容含製作費、各頁面製作項目、WordPress 後台、第一年 AWS 主機與網域、第二年起續費與保固維護費等明細。</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<div class="footer">
+  <div class="wrap">
+    <div class="row">
+      <div><b>提案單位</b><br>Tellustek<br>service@tellustek.com</div>
+      <div><b>客戶</b><br>沐恩動物醫院<br>林文傑 醫師</div>
+      <div><b>聯絡方式</b><br>0958-131997<br>jakelinvet@gmail.com</div>
+      <div><b>提案日期</b><br>2026 / 05 / 14<br>第一次會議後提出</div>
+    </div>
+    <div style="margin-top:32px;padding-top:20px;border-top:1px solid #3a424b;font-size:14px;color:#8c97a1;">
+      本提案內容為初步規劃建議，實際執行範圍與報價以雙方確認之合約與報價單為準。
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,724 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>沐恩動物醫院 官網 Wireframe 原型</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#f3efe7;
+    --paper:#fffdf9;
+    --box:#ece5d7;
+    --box2:#f3ede1;
+    --bar:#ddd4c5;
+    --ink:#3b423f;
+    --grey:#8c8576;
+    --line:#ddd3c3;
+    --head:#2f5d58;
+    --accent:#2f8079;
+    --accent-soft:#e2efeb;
+    --warm:#cf8a5c;
+    --warm-soft:#f6e8d9;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html,body{height:100%;}
+  body{
+    font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;
+    background:var(--bg);color:var(--ink);line-height:1.7;font-size:16px;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:inherit;text-decoration:none;cursor:pointer;}
+  /* ---- prototype notice ---- */
+  .proto-note{
+    background:var(--ink);color:#fff;font-size:13px;text-align:center;
+    padding:7px 16px;letter-spacing:.3px;
+  }
+  .proto-note b{color:#e7b48a;}
+  /* ---- shell ---- */
+  .site{width:100%;background:var(--paper);min-height:100%;}
+  .wrap{max-width:1380px;margin:0 auto;padding:0 48px;}
+  /* ---- header ---- */
+  header{position:sticky;top:0;z-index:50;background:var(--head);color:#fff;}
+  .bar{display:flex;align-items:center;gap:20px;padding:0 48px;height:66px;
+    max-width:1380px;margin:0 auto;}
+  .logo{font-size:19px;font-weight:800;letter-spacing:1px;cursor:pointer;flex:none;}
+  .logo small{display:block;font-size:10px;font-weight:400;opacity:.6;letter-spacing:2px;}
+  nav{display:flex;align-items:center;gap:4px;margin-left:auto;}
+  nav .nlink{
+    padding:8px 14px;font-size:15px;border-radius:6px;position:relative;
+    color:#d2e4e1;white-space:nowrap;
+  }
+  nav .nlink:hover{background:rgba(255,255,255,.1);color:#fff;}
+  nav .nlink.on{color:#fff;background:var(--accent);}
+  .has-sub{position:relative;}
+  .sub{
+    display:none;position:absolute;top:100%;left:0;background:#fff;
+    min-width:160px;border-radius:8px;overflow:hidden;
+    box-shadow:0 8px 24px rgba(0,0,0,.18);padding:6px 0;
+  }
+  .has-sub:hover .sub{display:block;}
+  .sub a{display:block;padding:9px 16px;font-size:14px;color:var(--ink);}
+  .sub a:hover{background:var(--accent-soft);color:var(--accent);}
+  .tel{
+    margin-left:8px;font-size:14px;background:var(--warm);color:#fff;
+    padding:8px 14px;border-radius:6px;font-weight:700;white-space:nowrap;
+  }
+  .burger{
+    display:none;margin-left:auto;background:none;border:1.5px solid rgba(255,255,255,.5);
+    color:#fff;font-size:20px;width:42px;height:38px;border-radius:7px;cursor:pointer;
+  }
+  .scrim{display:none;position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:60;}
+  /* ---- generic wireframe pieces ---- */
+  .page{display:none;}
+  .page.active{display:block;}
+  .banner{
+    background:var(--box);border-bottom:1px solid var(--line);
+    padding:40px;text-align:center;
+  }
+  .banner h1{font-size:28px;font-weight:800;color:var(--ink);}
+  .banner .en{font-size:12px;letter-spacing:3px;color:var(--grey);margin-top:4px;}
+  .crumb{font-size:13px;color:var(--grey);padding:16px 0 0;}
+  .crumb a:hover{color:var(--accent);text-decoration:underline;}
+  section.block{padding:34px 0;}
+  .sec-h{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:18px;}
+  .sec-h h2{font-size:22px;font-weight:800;}
+  .sec-h .more{font-size:13px;color:var(--accent);}
+  .sec-h .more:hover{text-decoration:underline;}
+  .wb{background:var(--box);border:1px solid var(--line);border-radius:10px;}
+  .img-ph{
+    background:repeating-linear-gradient(45deg,#ece4d3,#ece4d3 10px,#e4dbc8 10px,#e4dbc8 20px);
+    border:1.5px dashed #c3b89e;border-radius:10px;
+    display:flex;align-items:center;justify-content:center;
+    color:#a89e88;font-size:13px;
+  }
+  .lines span{display:block;height:11px;background:#e7ddca;border-radius:3px;margin-bottom:9px;}
+  .lines span:nth-child(3n){width:88%;}
+  .lines span:last-child{width:55%;}
+  .grid{display:grid;gap:20px;}
+  .g2{grid-template-columns:repeat(2,1fr);}
+  .g3{grid-template-columns:repeat(3,1fr);}
+  .g4{grid-template-columns:repeat(4,1fr);}
+  .card{
+    background:var(--box2);border:1px solid var(--line);border-radius:12px;
+    padding:18px;transition:transform .12s,box-shadow .12s;
+  }
+  a.card{cursor:pointer;}
+  a.card:hover{transform:translateY(-3px);box-shadow:0 8px 20px rgba(0,0,0,.08);border-color:#c4b596;}
+  .chip{
+    display:inline-block;font-size:13px;padding:6px 14px;border-radius:20px;
+    background:var(--box);border:1px solid var(--line);color:var(--grey);cursor:pointer;
+  }
+  .chip.on{background:var(--accent);color:#fff;border-color:var(--accent);}
+  .btn{
+    display:inline-block;font-size:14px;padding:9px 20px;border-radius:7px;
+    background:var(--accent);color:#fff;font-weight:600;cursor:pointer;
+  }
+  .btn.ghost{background:#fff;color:var(--accent);border:1px solid var(--accent);}
+  .tag{display:inline-block;font-size:12px;padding:3px 10px;border-radius:4px;
+    background:var(--accent-soft);color:var(--accent);font-weight:600;}
+  /* hero */
+  .hero{
+    height:400px;
+    background:repeating-linear-gradient(45deg,#ebe3d2,#ebe3d2 14px,#e2d8c4 14px,#e2d8c4 28px);
+    border-bottom:1.5px dashed #c3b89e;display:flex;flex-direction:column;
+    align-items:center;justify-content:center;gap:6px;color:#9a9080;
+  }
+  .hero .big{font-size:18px;font-weight:700;color:#6f6a5b;}
+  .dots{display:flex;gap:8px;margin-top:8px;}
+  .dots i{width:9px;height:9px;border-radius:50%;background:#c7bca4;}
+  .dots i:first-child{background:#8c8576;}
+  /* news list rows */
+  .nrow{
+    display:flex;align-items:center;gap:16px;padding:16px 18px;
+    border:1px solid var(--line);border-radius:10px;background:var(--box2);
+    margin-bottom:12px;cursor:pointer;
+  }
+  .nrow:hover{border-color:#c4b596;background:#fffdf9;}
+  .nrow .date{font-size:13px;color:var(--grey);flex:none;width:96px;}
+  .nrow .ntitle{flex:1;font-size:15px;}
+  .nrow .arrow{color:var(--grey);}
+  /* doctor / service cards */
+  .doc-photo{height:170px;border-radius:8px;margin-bottom:12px;}
+  .svc-ic{width:54px;height:54px;border-radius:12px;background:var(--box);
+    border:1px solid var(--line);margin-bottom:12px;}
+  .name{font-size:16px;font-weight:700;margin-bottom:4px;}
+  .role{font-size:13px;color:var(--grey);}
+  /* table */
+  table{width:100%;border-collapse:collapse;font-size:14px;}
+  th,td{border:1px solid var(--line);padding:10px 12px;text-align:center;}
+  th{background:var(--box);font-weight:700;}
+  /* pagination */
+  .pager{display:flex;justify-content:center;gap:8px;margin-top:24px;}
+  .pager span{width:36px;height:36px;border-radius:8px;border:1px solid var(--line);
+    display:flex;align-items:center;justify-content:center;font-size:14px;background:#fff;cursor:pointer;}
+  .pager span.on{background:var(--accent);color:#fff;border-color:var(--accent);}
+  /* CTA strip */
+  .cta{
+    background:var(--warm-soft);border:1px solid #e7d2b8;border-radius:12px;
+    padding:22px 28px;display:flex;flex-wrap:wrap;align-items:center;gap:18px;
+    margin:30px 0;
+  }
+  .cta .t{font-size:17px;font-weight:800;color:#a9663a;}
+  .cta .d{font-size:14px;color:#8a7257;}
+  /* tabs */
+  .tabs{display:flex;gap:8px;flex-wrap:wrap;margin:20px 0 24px;border-bottom:1px solid var(--line);padding-bottom:14px;}
+  .tab{padding:8px 18px;border-radius:8px;font-size:14px;background:var(--box);
+    border:1px solid var(--line);cursor:pointer;color:var(--grey);}
+  .tab.on{background:var(--accent);color:#fff;border-color:var(--accent);}
+  .about-panel{display:none;}
+  .about-panel.on{display:block;}
+  /* article */
+  .article h1{font-size:24px;font-weight:800;margin:6px 0 8px;}
+  .article .meta{font-size:13px;color:var(--grey);margin-bottom:18px;}
+  .article .hero-img{height:300px;margin-bottom:22px;}
+  .docview{display:grid;grid-template-columns:340px 1fr;gap:36px;align-items:start;}
+  /* footer */
+  footer{background:var(--head);color:#c4cace;margin-top:20px;}
+  .foot{display:flex;flex-wrap:wrap;gap:48px;padding:44px 48px;max-width:1380px;margin:0 auto;}
+  .foot h4{color:#fff;font-size:14px;margin-bottom:12px;letter-spacing:1px;}
+  .foot p,.foot a{font-size:13.5px;line-height:2;display:block;color:#cfe1dd;}
+  .foot a:hover{color:#fff;}
+  .foot .mapph{width:200px;height:96px;border-radius:8px;
+    background:repeating-linear-gradient(45deg,#3a6862,#3a6862 10px,#34605a 10px,#34605a 20px);
+    border:1.5px dashed #5d8b85;display:flex;align-items:center;justify-content:center;
+    color:#a9c5c0;font-size:12px;}
+  .foot-bot{border-top:1px solid #3f6f69;padding:16px 48px;font-size:12px;color:#a3c0bb;
+    max-width:1380px;margin:0 auto;}
+  /* ---- responsive ---- */
+  @media(max-width:860px){
+    .wrap{padding:0 20px;}
+    .bar{padding:0 20px;height:58px;gap:12px;}
+    .logo{font-size:17px;}
+    .burger{display:block;}
+    nav{
+      position:fixed;top:0;right:0;width:74%;max-width:300px;height:100%;
+      background:var(--head);flex-direction:column;align-items:stretch;gap:2px;
+      margin-left:0;padding:70px 16px 24px;z-index:70;
+      transform:translateX(100%);transition:transform .25s;overflow-y:auto;
+    }
+    nav.open{transform:translateX(0);}
+    nav .nlink{padding:12px 14px;font-size:16px;}
+    .has-sub{display:flex;flex-direction:column;}
+    .sub{display:block;position:static;box-shadow:none;background:rgba(0,0,0,.18);
+      border-radius:8px;margin:2px 0 6px;padding:4px 0;}
+    .sub a{color:#cfd4d8;padding:9px 28px;font-size:14px;}
+    .sub a:hover{background:rgba(255,255,255,.08);color:#fff;}
+    .tel{margin:10px 0 0 14px;align-self:flex-start;}
+    .scrim.show{display:block;}
+    .banner{padding:30px 20px;}
+    .banner h1{font-size:23px;}
+    .hero{height:200px;}
+    .article .hero-img{height:180px;}
+    .docview{grid-template-columns:1fr;gap:20px;}
+    .g4{grid-template-columns:repeat(2,1fr);}
+    .g3{grid-template-columns:repeat(2,1fr);}
+    .g2{grid-template-columns:1fr;}
+    .grid{gap:14px;}
+    .foot{padding:30px 20px;gap:28px;}
+    .foot-bot{padding:14px 20px;}
+    .cta{flex-direction:column;align-items:flex-start;gap:8px;}
+    .nrow .date{width:auto;}
+    .nrow{flex-wrap:wrap;gap:6px 12px;}
+  }
+  @media(max-width:520px){
+    .g4,.g3{grid-template-columns:1fr;}
+    .banner h1{font-size:20px;}
+    .sec-h h2{font-size:19px;}
+  }
+</style>
+</head>
+<body>
+
+<div class="proto-note">🔧 <b>網站線框稿原型 (Wireframe)</b> — 點擊上方導覽列、卡片、文章列表即可切換頁面；可縮放視窗測試 RWD 響應式</div>
+
+<div class="site">
+  <!-- ===== HEADER ===== -->
+  <header>
+    <div class="bar">
+      <div class="logo" onclick="go('home')">沐恩動物醫院<small>MU-EN ANIMAL HOSPITAL</small></div>
+      <button class="burger" onclick="toggleMenu()" aria-label="選單">≡</button>
+      <nav id="nav">
+        <div class="has-sub">
+          <a class="nlink" data-nav="about" onclick="go('about')">關於沐恩 ▾</a>
+          <div class="sub">
+            <a onclick="goAbout('intro')">醫院介紹</a>
+            <a onclick="goAbout('env')">環境與設備</a>
+            <a onclick="goAbout('hours')">看診時間</a>
+            <a onclick="goAbout('traffic')">交通資訊</a>
+          </div>
+        </div>
+        <a class="nlink" data-nav="team" onclick="go('team')">醫療團隊</a>
+        <a class="nlink" data-nav="services" onclick="go('services')">診療服務</a>
+        <a class="nlink" data-nav="news" onclick="go('news')">最新消息</a>
+        <a class="nlink" data-nav="edu" onclick="go('edu')">寵物衛教</a>
+        <span class="tel">☎ 電話預約</span>
+      </nav>
+    </div>
+    <div class="scrim" id="scrim" onclick="closeMenu()"></div>
+  </header>
+
+  <main>
+    <!-- ===================== 首頁 ===================== -->
+    <section class="page active" id="home">
+      <div class="hero">
+        <div class="big">主視覺輪播 Banner</div>
+        <div>醫院形象 ‧ 重點訊息 ‧ 看診資訊</div>
+        <div class="dots"><i></i><i></i><i></i></div>
+      </div>
+      <div class="wrap">
+        <section class="block">
+          <div class="grid g3">
+            <a class="card" onclick="go('news')" style="text-align:center;padding:28px 18px;">
+              <div class="svc-ic" style="margin:0 auto 12px;"></div>
+              <div class="name">最新消息</div>
+              <div class="role">院所公告、活動與看診異動</div>
+            </a>
+            <a class="card" onclick="go('services')" style="text-align:center;padding:28px 18px;">
+              <div class="svc-ic" style="margin:0 auto 12px;"></div>
+              <div class="name">診療服務</div>
+              <div class="role">犬貓內外科、預防保健、影像檢查</div>
+            </a>
+            <a class="card" onclick="go('edu')" style="text-align:center;padding:28px 18px;">
+              <div class="svc-ic" style="margin:0 auto 12px;"></div>
+              <div class="name">寵物衛教</div>
+              <div class="role">犬貓飼養照護與健康知識</div>
+            </a>
+          </div>
+        </section>
+
+        <section class="block">
+          <div class="sec-h">
+            <h2>最新消息</h2>
+            <a class="more" onclick="go('news')">查看更多 ›</a>
+          </div>
+          <div class="nrow" onclick="go('news-detail')">
+            <div class="date">2026/05/12</div><span class="tag">院所公告</span>
+            <div class="ntitle">看診時間調整公告 ‧ 國定假日服務時間說明</div><div class="arrow">›</div>
+          </div>
+          <div class="nrow" onclick="go('news-detail')">
+            <div class="date">2026/05/05</div><span class="tag">活動</span>
+            <div class="ntitle">春季犬貓健康檢查專案開跑</div><div class="arrow">›</div>
+          </div>
+          <div class="nrow" onclick="go('news-detail')">
+            <div class="date">2026/04/28</div><span class="tag">院所公告</span>
+            <div class="ntitle">新增進階影像檢查設備，超音波檢查服務上線</div><div class="arrow">›</div>
+          </div>
+        </section>
+
+        <section class="block">
+          <div class="sec-h"><h2>診療服務</h2><a class="more" onclick="go('services')">全部服務 ›</a></div>
+          <div class="grid g4">
+            <a class="card" onclick="go('services')" style="text-align:center;">
+              <div class="svc-ic" style="margin:0 auto 10px;"></div><div class="name">一般診療</div></a>
+            <a class="card" onclick="go('services')" style="text-align:center;">
+              <div class="svc-ic" style="margin:0 auto 10px;"></div><div class="name">預防保健</div></a>
+            <a class="card" onclick="go('services')" style="text-align:center;">
+              <div class="svc-ic" style="margin:0 auto 10px;"></div><div class="name">外科手術</div></a>
+            <a class="card" onclick="go('services')" style="text-align:center;">
+              <div class="svc-ic" style="margin:0 auto 10px;"></div><div class="name">影像與檢驗</div></a>
+          </div>
+        </section>
+
+        <section class="block">
+          <div class="sec-h"><h2>醫療團隊</h2><a class="more" onclick="go('team')">認識醫師 ›</a></div>
+          <div class="grid g3">
+            <a class="card" onclick="go('doctor-detail')">
+              <div class="img-ph doc-photo">醫師照片</div>
+              <div class="name">醫師姓名</div><div class="role">院長 ‧ 犬貓內科</div></a>
+            <a class="card" onclick="go('doctor-detail')">
+              <div class="img-ph doc-photo">醫師照片</div>
+              <div class="name">醫師姓名</div><div class="role">外科手術</div></a>
+            <a class="card" onclick="go('doctor-detail')">
+              <div class="img-ph doc-photo">醫師照片</div>
+              <div class="name">醫師姓名</div><div class="role">影像診斷</div></a>
+          </div>
+        </section>
+
+        <div class="cta">
+          <div>
+            <div class="t">☎ 電話預約看診</div>
+            <div class="d">本院採電話預約 ‧ 看診時間與交通資訊請見頁尾</div>
+          </div>
+          <a class="btn" style="margin-left:auto;" onclick="goAbout('hours')">查看看診時間</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== 關於沐恩 ===================== -->
+    <section class="page" id="about">
+      <div class="banner"><h1>關於沐恩</h1><div class="en">ABOUT US</div></div>
+      <div class="wrap">
+        <div class="crumb"><a onclick="go('home')">首頁</a> / 關於沐恩</div>
+        <div class="tabs">
+          <div class="tab" data-tab="intro" onclick="setAboutTab('intro')">醫院介紹</div>
+          <div class="tab" data-tab="env" onclick="setAboutTab('env')">環境與設備</div>
+          <div class="tab" data-tab="hours" onclick="setAboutTab('hours')">看診時間</div>
+          <div class="tab" data-tab="traffic" onclick="setAboutTab('traffic')">交通資訊</div>
+        </div>
+
+        <div class="about-panel" id="ap-intro">
+          <div class="grid g2" style="align-items:start;">
+            <div>
+              <h2 style="font-size:20px;margin-bottom:12px;">醫院介紹</h2>
+              <div class="lines">
+                <span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+              </div>
+              <p style="font-size:13px;color:var(--grey);margin-top:8px;">（此區放置動物醫院理念、成立沿革、醫療特色與服務對象等介紹文字）</p>
+            </div>
+            <div class="img-ph" style="height:280px;">醫院形象照片</div>
+          </div>
+        </div>
+
+        <div class="about-panel" id="ap-env">
+          <h2 style="font-size:20px;margin-bottom:16px;">環境與設備</h2>
+          <div class="grid g3">
+            <div class="img-ph" style="height:160px;">候診區照片</div>
+            <div class="img-ph" style="height:160px;">診療室照片</div>
+            <div class="img-ph" style="height:160px;">手術室照片</div>
+            <div class="img-ph" style="height:160px;">住院照護區照片</div>
+            <div class="img-ph" style="height:160px;">X 光 / 影像室照片</div>
+            <div class="img-ph" style="height:160px;">檢驗設備照片</div>
+          </div>
+        </div>
+
+        <div class="about-panel" id="ap-hours">
+          <h2 style="font-size:20px;margin-bottom:16px;">看診時間</h2>
+          <table>
+            <tr><th>時段</th><th>一</th><th>二</th><th>三</th><th>四</th><th>五</th><th>六</th><th>日</th></tr>
+            <tr><td>上午</td><td>●</td><td>●</td><td>●</td><td>●</td><td>●</td><td>●</td><td>●</td></tr>
+            <tr><td>下午</td><td>●</td><td>●</td><td>●</td><td>●</td><td>●</td><td>●</td><td>—</td></tr>
+            <tr><td>晚間</td><td>●</td><td>●</td><td>●</td><td>●</td><td>●</td><td>—</td><td>—</td></tr>
+          </table>
+          <p style="font-size:13px;color:var(--grey);margin-top:12px;">（實際看診時段以院方提供為準 ‧ 本院採電話預約）</p>
+        </div>
+
+        <div class="about-panel" id="ap-traffic">
+          <h2 style="font-size:20px;margin-bottom:16px;">交通資訊</h2>
+          <div class="grid g2" style="align-items:start;">
+            <div class="img-ph" style="height:280px;">Google 地圖嵌入區</div>
+            <div>
+              <div class="lines"><span></span><span></span><span></span><span></span></div>
+              <p style="font-size:13px;color:var(--grey);margin-top:8px;">（醫院地址、停車資訊、大眾運輸方式說明）</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== 醫療團隊 ===================== -->
+    <section class="page" id="team">
+      <div class="banner"><h1>醫療團隊</h1><div class="en">MEDICAL TEAM</div></div>
+      <div class="wrap">
+        <div class="crumb"><a onclick="go('home')">首頁</a> / 醫療團隊</div>
+        <section class="block">
+          <div class="grid g3">
+            <a class="card" onclick="go('doctor-detail')"><div class="img-ph doc-photo">醫師照片</div>
+              <div class="name">醫師姓名</div><div class="role">院長 ‧ 犬貓內科</div>
+              <div class="lines" style="margin-top:10px;"><span></span><span></span></div></a>
+            <a class="card" onclick="go('doctor-detail')"><div class="img-ph doc-photo">醫師照片</div>
+              <div class="name">醫師姓名</div><div class="role">外科手術</div>
+              <div class="lines" style="margin-top:10px;"><span></span><span></span></div></a>
+            <a class="card" onclick="go('doctor-detail')"><div class="img-ph doc-photo">醫師照片</div>
+              <div class="name">醫師姓名</div><div class="role">影像診斷</div>
+              <div class="lines" style="margin-top:10px;"><span></span><span></span></div></a>
+            <a class="card" onclick="go('doctor-detail')"><div class="img-ph doc-photo">醫師照片</div>
+              <div class="name">醫師姓名</div><div class="role">皮膚科</div>
+              <div class="lines" style="margin-top:10px;"><span></span><span></span></div></a>
+            <a class="card" onclick="go('doctor-detail')"><div class="img-ph doc-photo">醫師照片</div>
+              <div class="name">醫師姓名</div><div class="role">牙科治療</div>
+              <div class="lines" style="margin-top:10px;"><span></span><span></span></div></a>
+            <a class="card" onclick="go('doctor-detail')"><div class="img-ph doc-photo">醫師照片</div>
+              <div class="name">醫師姓名</div><div class="role">急重症照護</div>
+              <div class="lines" style="margin-top:10px;"><span></span><span></span></div></a>
+          </div>
+          <p style="font-size:13px;color:var(--grey);margin-top:16px;">（每位醫師卡片含照片、姓名、診療專長與證照資訊，點擊可進入個別介紹頁）</p>
+        </section>
+      </div>
+    </section>
+
+    <!-- ===================== 醫師個別介紹 ===================== -->
+    <section class="page" id="doctor-detail">
+      <div class="banner"><h1>醫療團隊</h1><div class="en">MEDICAL TEAM</div></div>
+      <div class="wrap">
+        <div class="crumb"><a onclick="go('home')">首頁</a> / <a onclick="go('team')">醫療團隊</a> / 醫師姓名</div>
+        <section class="block">
+          <div class="docview">
+            <div class="img-ph" style="height:380px;">醫師照片</div>
+            <div>
+              <div class="name" style="font-size:24px;margin-bottom:2px;">醫師姓名</div>
+              <div class="role" style="font-size:15px;margin-bottom:14px;">院長 ‧ 犬貓內科</div>
+              <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:22px;">
+                <span class="tag">犬貓內科</span><span class="tag">健康管理</span><span class="tag">慢性病照護</span>
+              </div>
+              <h2 style="font-size:17px;font-weight:800;margin-bottom:10px;">學經歷</h2>
+              <div class="lines"><span></span><span></span><span></span><span></span></div>
+              <h2 style="font-size:17px;font-weight:800;margin:24px 0 10px;">專業證照</h2>
+              <div class="lines"><span></span><span></span><span></span></div>
+              <h2 style="font-size:17px;font-weight:800;margin:24px 0 10px;">診療專長</h2>
+              <div class="lines"><span></span><span></span></div>
+              <p style="font-size:13px;color:var(--grey);margin-top:10px;">（醫師個人簡介、學經歷、專業證照與診療專長，由 WordPress 後台維護）</p>
+            </div>
+          </div>
+          <div class="sec-h" style="margin-top:42px;">
+            <h2>其他醫師</h2><a class="more" onclick="go('team')">全部團隊 ›</a>
+          </div>
+          <div class="grid g3">
+            <a class="card" onclick="go('doctor-detail')"><div class="img-ph doc-photo">醫師照片</div>
+              <div class="name">醫師姓名</div><div class="role">外科手術</div></a>
+            <a class="card" onclick="go('doctor-detail')"><div class="img-ph doc-photo">醫師照片</div>
+              <div class="name">醫師姓名</div><div class="role">影像診斷</div></a>
+            <a class="card" onclick="go('doctor-detail')"><div class="img-ph doc-photo">醫師照片</div>
+              <div class="name">醫師姓名</div><div class="role">皮膚科</div></a>
+          </div>
+          <div style="margin-top:24px;"><a class="btn ghost" onclick="go('team')">‹ 返回醫療團隊</a></div>
+        </section>
+      </div>
+    </section>
+
+    <!-- ===================== 診療服務 ===================== -->
+    <section class="page" id="services">
+      <div class="banner"><h1>診療服務</h1><div class="en">SERVICES</div></div>
+      <div class="wrap">
+        <div class="crumb"><a onclick="go('home')">首頁</a> / 診療服務</div>
+        <section class="block">
+          <div class="grid g2">
+            <div class="card" style="display:flex;gap:18px;">
+              <div class="svc-ic" style="flex:none;"></div>
+              <div style="flex:1;"><div class="name">一般診療（內科）</div>
+                <div class="lines" style="margin-top:8px;"><span></span><span></span><span></span></div></div>
+            </div>
+            <div class="card" style="display:flex;gap:18px;">
+              <div class="svc-ic" style="flex:none;"></div>
+              <div style="flex:1;"><div class="name">預防保健（疫苗注射 ‧ 驅蟲 ‧ 晶片）</div>
+                <div class="lines" style="margin-top:8px;"><span></span><span></span><span></span></div></div>
+            </div>
+            <div class="card" style="display:flex;gap:18px;">
+              <div class="svc-ic" style="flex:none;"></div>
+              <div style="flex:1;"><div class="name">外科手術</div>
+                <div class="lines" style="margin-top:8px;"><span></span><span></span><span></span></div></div>
+            </div>
+            <div class="card" style="display:flex;gap:18px;">
+              <div class="svc-ic" style="flex:none;"></div>
+              <div style="flex:1;"><div class="name">健康檢查</div>
+                <div class="lines" style="margin-top:8px;"><span></span><span></span><span></span></div></div>
+            </div>
+            <div class="card" style="display:flex;gap:18px;">
+              <div class="svc-ic" style="flex:none;"></div>
+              <div style="flex:1;"><div class="name">影像與檢驗（X 光 ‧ 超音波 ‧ 血檢）</div>
+                <div class="lines" style="margin-top:8px;"><span></span><span></span><span></span></div></div>
+            </div>
+            <div class="card" style="display:flex;gap:18px;">
+              <div class="svc-ic" style="flex:none;"></div>
+              <div style="flex:1;"><div class="name">住院照護</div>
+                <div class="lines" style="margin-top:8px;"><span></span><span></span><span></span></div></div>
+            </div>
+          </div>
+          <div class="cta">
+            <div><div class="t">☎ 電話預約看診</div><div class="d">如需了解診療服務細節，歡迎來電洽詢</div></div>
+            <a class="btn" style="margin-left:auto;" onclick="goAbout('hours')">查看看診時間</a>
+          </div>
+        </section>
+      </div>
+    </section>
+
+    <!-- ===================== 最新消息（列表） ===================== -->
+    <section class="page" id="news">
+      <div class="banner"><h1>最新消息</h1><div class="en">NEWS</div></div>
+      <div class="wrap">
+        <div class="crumb"><a onclick="go('home')">首頁</a> / 最新消息</div>
+        <section class="block">
+          <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:20px;">
+            <span class="chip on">全部</span>
+            <span class="chip">院所公告</span>
+            <span class="chip">活動</span>
+          </div>
+          <div class="nrow" onclick="go('news-detail')"><div class="date">2026/05/12</div>
+            <span class="tag">院所公告</span><div class="ntitle">看診時間調整公告 ‧ 國定假日服務時間說明</div><div class="arrow">›</div></div>
+          <div class="nrow" onclick="go('news-detail')"><div class="date">2026/05/05</div>
+            <span class="tag">活動</span><div class="ntitle">春季犬貓健康檢查專案開跑</div><div class="arrow">›</div></div>
+          <div class="nrow" onclick="go('news-detail')"><div class="date">2026/04/28</div>
+            <span class="tag">院所公告</span><div class="ntitle">新增進階影像檢查設備，超音波檢查服務上線</div><div class="arrow">›</div></div>
+          <div class="nrow" onclick="go('news-detail')"><div class="date">2026/04/15</div>
+            <span class="tag">活動</span><div class="ntitle">犬貓疫苗接種衛教講座報名中</div><div class="arrow">›</div></div>
+          <div class="nrow" onclick="go('news-detail')"><div class="date">2026/04/02</div>
+            <span class="tag">院所公告</span><div class="ntitle">清明連假看診時間公告</div><div class="arrow">›</div></div>
+          <div class="nrow" onclick="go('news-detail')"><div class="date">2026/03/20</div>
+            <span class="tag">活動</span><div class="ntitle">犬貓絕育優惠專案開放預約</div><div class="arrow">›</div></div>
+          <div class="pager"><span>‹</span><span class="on">1</span><span>2</span><span>3</span><span>›</span></div>
+        </section>
+      </div>
+    </section>
+
+    <!-- ===================== 最新消息（內頁） ===================== -->
+    <section class="page" id="news-detail">
+      <div class="banner"><h1>最新消息</h1><div class="en">NEWS</div></div>
+      <div class="wrap">
+        <div class="crumb"><a onclick="go('home')">首頁</a> / <a onclick="go('news')">最新消息</a> / 文章標題</div>
+        <section class="block article">
+          <span class="tag">院所公告</span>
+          <h1>看診時間調整公告 ‧ 國定假日服務時間說明</h1>
+          <div class="meta">發佈日期 2026/05/12 ‧ 分類：院所公告</div>
+          <div class="img-ph hero-img">文章主圖</div>
+          <div class="lines">
+            <span></span><span></span><span></span><span></span><span></span>
+            <span></span><span></span><span></span><span></span>
+          </div>
+          <p style="font-size:13px;color:var(--grey);margin-top:8px;">（此區為文章內文，由 WordPress 後台編輯，可含文字、圖片、連結）</p>
+          <div style="margin-top:24px;">
+            <a class="btn ghost" onclick="go('news')">‹ 返回列表</a>
+          </div>
+        </section>
+        <div class="cta">
+          <div><div class="t">☎ 電話預約看診</div><div class="d">看診時間與交通資訊請見頁尾</div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== 寵物衛教（列表） ===================== -->
+    <section class="page" id="edu">
+      <div class="banner"><h1>寵物衛教</h1><div class="en">PET CARE</div></div>
+      <div class="wrap">
+        <div class="crumb"><a onclick="go('home')">首頁</a> / 寵物衛教</div>
+        <section class="block">
+          <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:20px;">
+            <span class="chip on">全部</span><span class="chip">犬</span><span class="chip">貓</span>
+            <span class="chip">預防保健</span><span class="chip">營養</span><span class="chip">疾病照護</span>
+          </div>
+          <div class="grid g3">
+            <a class="card" onclick="go('edu-detail')"><div class="img-ph" style="height:140px;">文章縮圖</div>
+              <div class="name" style="margin-top:12px;">衛教文章標題</div><span class="tag" style="margin-top:6px;">預防保健</span>
+              <div class="lines" style="margin-top:10px;"><span></span><span></span></div></a>
+            <a class="card" onclick="go('edu-detail')"><div class="img-ph" style="height:140px;">文章縮圖</div>
+              <div class="name" style="margin-top:12px;">衛教文章標題</div><span class="tag" style="margin-top:6px;">營養</span>
+              <div class="lines" style="margin-top:10px;"><span></span><span></span></div></a>
+            <a class="card" onclick="go('edu-detail')"><div class="img-ph" style="height:140px;">文章縮圖</div>
+              <div class="name" style="margin-top:12px;">衛教文章標題</div><span class="tag" style="margin-top:6px;">犬</span>
+              <div class="lines" style="margin-top:10px;"><span></span><span></span></div></a>
+            <a class="card" onclick="go('edu-detail')"><div class="img-ph" style="height:140px;">文章縮圖</div>
+              <div class="name" style="margin-top:12px;">衛教文章標題</div><span class="tag" style="margin-top:6px;">貓</span>
+              <div class="lines" style="margin-top:10px;"><span></span><span></span></div></a>
+            <a class="card" onclick="go('edu-detail')"><div class="img-ph" style="height:140px;">文章縮圖</div>
+              <div class="name" style="margin-top:12px;">衛教文章標題</div><span class="tag" style="margin-top:6px;">疾病照護</span>
+              <div class="lines" style="margin-top:10px;"><span></span><span></span></div></a>
+            <a class="card" onclick="go('edu-detail')"><div class="img-ph" style="height:140px;">文章縮圖</div>
+              <div class="name" style="margin-top:12px;">衛教文章標題</div><span class="tag" style="margin-top:6px;">預防保健</span>
+              <div class="lines" style="margin-top:10px;"><span></span><span></span></div></a>
+          </div>
+          <div class="pager"><span>‹</span><span class="on">1</span><span>2</span><span>3</span><span>›</span></div>
+        </section>
+      </div>
+    </section>
+
+    <!-- ===================== 衛教文章（內頁） ===================== -->
+    <section class="page" id="edu-detail">
+      <div class="banner"><h1>寵物衛教</h1><div class="en">PET CARE</div></div>
+      <div class="wrap">
+        <div class="crumb"><a onclick="go('home')">首頁</a> / <a onclick="go('edu')">寵物衛教</a> / 文章標題</div>
+        <section class="block article">
+          <span class="tag">預防保健</span>
+          <h1>衛教文章標題 ‧ 居家犬貓健康照護重點</h1>
+          <div class="meta">分類：預防保健 ‧ 發佈日期 2026/05/10</div>
+          <div class="img-ph hero-img">文章主圖</div>
+          <div class="lines">
+            <span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+          </div>
+          <div class="sec-h" style="margin-top:34px;"><h2>相關文章推薦</h2></div>
+          <div class="grid g3">
+            <a class="card" onclick="go('edu-detail')"><div class="img-ph" style="height:110px;">縮圖</div>
+              <div class="name" style="margin-top:10px;font-size:14px;">相關衛教文章</div></a>
+            <a class="card" onclick="go('edu-detail')"><div class="img-ph" style="height:110px;">縮圖</div>
+              <div class="name" style="margin-top:10px;font-size:14px;">相關衛教文章</div></a>
+            <a class="card" onclick="go('edu-detail')"><div class="img-ph" style="height:110px;">縮圖</div>
+              <div class="name" style="margin-top:10px;font-size:14px;">相關衛教文章</div></a>
+          </div>
+          <div style="margin-top:24px;"><a class="btn ghost" onclick="go('edu')">‹ 返回列表</a></div>
+        </section>
+      </div>
+    </section>
+  </main>
+
+  <!-- ===== FOOTER ===== -->
+  <footer>
+    <div class="foot">
+      <div>
+        <h4>沐恩動物醫院</h4>
+        <p>☎ 電話預約看診</p>
+        <p>service@（電話 / Email 待提供）</p>
+      </div>
+      <div>
+        <h4>看診時間</h4>
+        <p>週一至週六　上午 / 下午 / 晚間</p>
+        <p>週日　上午看診</p>
+        <a onclick="goAbout('hours')">查看完整看診時間 ›</a>
+      </div>
+      <div>
+        <h4>交通與地址</h4>
+        <div class="mapph">地圖</div>
+      </div>
+      <div>
+        <h4>快速連結</h4>
+        <a onclick="go('about')">關於沐恩</a>
+        <a onclick="go('team')">醫療團隊</a>
+        <a onclick="go('services')">診療服務</a>
+        <a onclick="go('news')">最新消息</a>
+        <a onclick="go('edu')">寵物衛教</a>
+      </div>
+    </div>
+    <div class="foot-bot">© 2026 沐恩動物醫院 ‧ 本頁面為網站線框稿原型 (Wireframe Prototype)，內容與視覺均為示意，最終以正式設計稿為準。</div>
+  </footer>
+</div>
+
+<script>
+  var PAGES = ['home','about','team','doctor-detail','services','news','news-detail','edu','edu-detail'];
+  var NAVMAP = {home:'home',about:'about',team:'team','doctor-detail':'team',services:'services',
+                news:'news','news-detail':'news',edu:'edu','edu-detail':'edu'};
+
+  function showPage(id){
+    if(PAGES.indexOf(id) === -1) id = 'home';
+    document.querySelectorAll('.page').forEach(function(p){
+      p.classList.toggle('active', p.id === id);
+    });
+    var navKey = NAVMAP[id];
+    document.querySelectorAll('.nlink').forEach(function(n){
+      n.classList.toggle('on', n.getAttribute('data-nav') === navKey);
+    });
+    closeMenu();
+    window.scrollTo(0,0);
+  }
+  function go(id){
+    if(location.hash === '#'+id){ showPage(id); }
+    else { location.hash = id; }
+  }
+  function goAbout(tab){
+    showPage('about');
+    location.hash = 'about';
+    setAboutTab(tab);
+  }
+  function setAboutTab(tab){
+    document.querySelectorAll('#about .tab').forEach(function(t){
+      t.classList.toggle('on', t.getAttribute('data-tab') === tab);
+    });
+    document.querySelectorAll('#about .about-panel').forEach(function(p){
+      p.classList.toggle('on', p.id === 'ap-'+tab);
+    });
+  }
+  function toggleMenu(){
+    document.getElementById('nav').classList.toggle('open');
+    document.getElementById('scrim').classList.toggle('show');
+  }
+  function closeMenu(){
+    document.getElementById('nav').classList.remove('open');
+    document.getElementById('scrim').classList.remove('show');
+  }
+  window.addEventListener('hashchange', function(){
+    showPage(location.hash.slice(1));
+  });
+  // init
+  setAboutTab('intro');
+  showPage(location.hash.slice(1) || 'home');
+</script>
+</body>
+</html>

@@ -37,7 +37,23 @@ client-previews/
 
 ## Common tasks
 
-### Add a new client project
+### Process the upload inbox (`_inbox/`) — preferred intake path
+This repo uses a centralized upload workflow. Each client project is drafted in its own conversation, which drops output into `_inbox/<code>/` (HTML files + a `meta.yml`). This conversation is the single upload manager. Full spec: `HANDOFF.md`.
+
+When the user says **"處理 inbox"** (or "process inbox", optionally for one `<code>`):
+1. List `_inbox/` project folders, skipping `_TEMPLATE` and `README.md`.
+2. For each folder, read `meta.yml` (fields: 代號, 類型 [新案/更新], 客戶名稱, 聯絡人, email, 版本, 日期, 狀態, 變更摘要, 檔案說明).
+3. Validate each HTML: must have `index.html`; `index.html` links to siblings via relative paths; no `localStorage`/`sessionStorage`; strip trailing null bytes; ensure UTF-8 (no BOM).
+4. Copy files into the live `<code>/` folder (overwrite if updating).
+5. 新案 → create `<code>/notes.md` (shenhe format, enrich by reading the proposal HTML). 更新 → append a row to the existing version-history table.
+6. Update the `README.md` index table (new row, or bump version + date).
+7. `git add` everything → commit → push (one commit can cover multiple projects).
+8. Delete the processed folder(s) from `_inbox/`.
+9. Report each live URL: `https://rdjue.github.io/client-previews/<code>/`.
+
+Note: `_inbox/<code>/` folders are gitignored (only `_inbox/README.md` and `_inbox/_TEMPLATE/` are tracked), so staging files never enter git history.
+
+### Add a new client project (manual, when not via inbox)
 1. Create folder `<code>/` (lowercase English code).
 2. Add `<code>/index.html` (the prototype HTML).
 3. Add `<code>/notes.md` (copy structure from `shenhe/notes.md`).

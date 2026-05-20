@@ -22,3 +22,9 @@ Desktop.ini
 
 # Claude Code local settings
 .claude/
+
+# Upload inbox staging area — incoming project folders are NOT tracked.
+# Only the convention docs (README + _TEMPLATE) are kept in git.
+_inbox/*
+!_inbox/README.md
+!_inbox/_TEMPLATE/

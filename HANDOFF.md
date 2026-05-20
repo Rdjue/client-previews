@@ -1,133 +1,83 @@
-# 客戶提案上傳說明
+# 客戶提案上傳交接說明
 
-這份文件是「交接 prompt」模板,用來把在另一個 Claude Code 對話討論完的客戶提案 HTML,移交給負責上傳到 GitHub Pages 的維運對話。
+集中式上傳流程:每個案子在各自的「規劃對話」討論與產出,完成後丟進收件匣 `_inbox/`;由單一的「上傳對話」統一驗證、整理、commit + push。好處是標準一致、git 不會亂、只有上傳對話需要 gh 授權。
 
-## 使用流程
-
-1. 在另一個 Claude Code 對話和 AI 討論並完成提案 HTML(可能不只一個檔,例如提案說明 + 線框 + 視覺稿)。
-2. 等內容定案,把下方「交接 prompt」整段(從 `提案內容我們已經討論定案了` 到最後一行)複製貼給該對話。
-3. 該對話會跑完 6 個步驟,最後給您一個 `【上傳新案子】` 或 `【更新既有案子】` 方塊;若沙箱寫不進 repo 資料夾,則會給「需手動搬檔」版方塊 + 搬遷指示。
-4. (若是需手動搬檔)按搬遷指示把檔案移到正確位置。
-5. 把方塊複製貼給維運本 repo 的對話(就是會幫您 commit + push 的那個),它會接手後續並回報線上網址。
+```
+規劃對話 A ─┐
+規劃對話 B ─┼─→  _inbox/<代號>/  ─→  上傳對話(這個 repo 的維運對話)  ─→  GitHub Pages
+規劃對話 C ─┘     (HTML + meta.yml)      驗證 / notes / README / commit / push
+```
 
 ---
 
-## 交接 prompt(整段複製貼到另一個對話)
+## A. 給「規劃對話」的指示
 
-````text
-提案內容我們已經討論定案了。現在請你做最後一步:把成果打包好,讓我可以拿去給另一個 Claude Code 對話上傳到 GitHub Pages。請依下列步驟執行。
+提案定案後,規劃對話只需做 4 件事(**不要碰 git**):
 
-# 步驟 1:盤點檔案清單
+1. 在 `D:\Dropbox\telluswork\client-previews\_inbox\<代號>\` 建資料夾(代號:英文小寫 3–10 字,不含空格/底線/中文)。
+2. 把所有 HTML 存進去;**必須有一個 `index.html`** 當落地頁,並用相對連結指向其他 HTML(例 `<a href="wireframe.html">`)。
+3. 同資料夾放一個 `meta.yml`,格式見 `_inbox/_TEMPLATE/meta.yml`。
+4. 完成後告訴使用者代號即可。
 
-列出這次提案要交付的所有 HTML 檔(可能不只一份,例如:提案說明 + 線框示意 + 視覺稿)。
+### 可直接貼給規劃對話的一行指示
 
-規則:
-- 必須有一個檔案叫 `index.html`,作為客戶開啟資料夾時看到的「落地頁」。
-- 其他檔案可以自由命名(英文小寫,例:`wireframe.html`、`mockup.html`、`flow.html`),全部放在同一個資料夾根目錄,不要再開子資料夾。
-- `index.html` 必須在頁面上有清楚的連結指向其他 HTML(用相對路徑 `<a href="wireframe.html">`),讓客戶可以在不同檔案間切換。
+```
+提案定案後,請把所有 HTML 存到 D:\Dropbox\telluswork\client-previews\_inbox\<代號>\,
+並在同資料夾放一個 meta.yml(格式見該路徑下 _TEMPLATE\meta.yml)。
+務必有一個 index.html 當落地頁、用相對連結指向其他 HTML。
+技術規範見 client-previews\HANDOFF.md 的「C. 技術規範」。不要碰 git,完成後告訴我代號。
+```
 
-# 步驟 2:技術自檢(對每一個 HTML 都檢查)
+---
 
-對清單中的**每一個**檔案,逐一確認:
+## B. 給「上傳對話」的指示
 
-- [ ] 該檔案本身完全自含,所有 CSS / JS 都 inline 在裡面(沒有引用 sibling CSS/JS 檔)
-- [ ] 沒有用 `localStorage` 或 `sessionStorage`
-- [ ] 外部資源只引用公開 CDN(Google Fonts / jsDelivr / cdnjs)
-- [ ] 沒有 JSX / TypeScript / SCSS 等需要 build 的原始碼
-- [ ] RWD:桌機、平板、手機寬度都能正常呈現
-- [ ] 中文字型用 Noto Sans TC 或同等繁中字型
-- [ ] 圖片佔位用公開 placeholder(例如 https://placehold.co/),沒有 base64 大圖
+使用者說「**處理 inbox**」(或「處理 inbox 的 `<代號>`」)時,執行:
 
-不符合的請當場修掉。
+1. 掃描 `_inbox/`,逐一處理每個案子資料夾(略過 `_TEMPLATE`)。
+2. 讀該資料夾 `meta.yml`。
+3. 對每個 HTML 做技術自檢:
+   - 確認有 `index.html`,且 `index.html` 內有相對連結指向其他 HTML。
+   - grep 確認無 `localStorage` / `sessionStorage`。
+   - 檢查編碼:若檔案含結尾 null byte 或非 UTF-8,修正(剝除 null、轉 UTF-8 無 BOM)。
+4. 把檔案搬進正式 `<代號>/`(覆蓋既有檔)。
+5. notes:
+   - 類型=新案 → 依 `shenhe/notes.md` 格式新建 `<代號>/notes.md`(可讀提案 HTML 補充內容)。
+   - 類型=更新 → 在既有 `notes.md` 版本歷程新增一列。
+6. 更新根目錄 `README.md` 專案索引表(新案加列;更新改版本+日期)。
+7. 一次 `git add` 全部 → commit → push。
+8. 刪除該案子在 `_inbox/` 的資料夾(清空收件匣)。
+9. 回報每個案子的線上網址 `https://rdjue.github.io/client-previews/<代號>/`。
 
-# 步驟 3:決定案子代號
+---
 
-若我們對話中還沒決定代號,請現在決定一個:
-- 英文小寫 3–10 字
-- 不含空格、底線、中文
-- 與客戶或專案有關(可音譯或意譯,例:深河出版 → `shenhe`)
+## C. 技術規範(每個 HTML 都須符合)
 
-# 步驟 4:寫檔到指定路徑
+- 單一檔案自含:所有 CSS / JS inline 在該 HTML 裡(不依賴 sibling .css / .js)。
+- 不可使用 `localStorage` / `sessionStorage`(跨主機會壞)。
+- 外部資源只能引用公開 CDN:Google Fonts、jsDelivr、cdnjs。
+- 不可使用需要 build 的格式(JSX 原始碼、TypeScript、SCSS 等);要用 React/Vue 請走 CDN production build。
+- 必須 RWD,桌機 / 平板 / 手機皆正常。
+- 中文字型用 Noto Sans TC / Noto Serif TC 或同等繁中字型。
+- 圖片佔位用公開 placeholder(例 https://placehold.co/),不要把 base64 大圖塞進檔案。
+- 編碼存成 UTF-8(無 BOM),檔尾不要有多餘 null byte。
 
-**先嘗試**寫到正式路徑(目標資料夾不存在請建立):
+---
 
-    D:\Dropbox\telluswork\client-previews\<案子代號>\<檔名>.html
+## meta.yml 範例
 
-每個 HTML 都寫進這個資料夾。
-
-**如果因權限或沙箱寫不進去**(例如 Write 工具回報失敗),改成:
-1. 把所有檔案寫到你**確定能寫**的位置(例如你目前的工作目錄,或一個你能控制的暫存資料夾)。
-2. 在後續步驟 6 的交接區塊裡,改填「搬遷指示」欄,清楚告訴我:
-   - 每個檔案目前的絕對路徑
-   - 每個檔案應該被搬到哪個絕對路徑
-   讓我可以手動搬。
-
-# 步驟 5:跟我確認缺漏資訊
-
-檢查對話過程是否已知下列資訊,有缺請列出來問我:
-- 客戶中文名
-- 聯絡人姓名
-- 聯絡人 email
-- 是新案子,還是既有案子的版本更新?若是更新,新版本號為 v 幾?
-
-# 步驟 6:輸出交接區塊
-
-在最後一則回覆的最末,輸出**一個獨立的、單獨用 ``` 包起來的程式碼區塊**,按下列格式之一填寫。
-
-## 情況 A:檔案已成功寫入正式路徑
-
-新案子:
-
-    【上傳新案子】
-    代號:<案子代號>
-    資料夾:D:\Dropbox\telluswork\client-previews\<案子代號>\
-    檔案清單:
-      - index.html        — <一行說明,例:提案說明與導覽>
-      - wireframe.html    — <一行說明,例:線框示意圖>
-      - mockup.html       — <一行說明,例:首頁視覺稿>
-    客戶名稱:<中文客戶名>
-    聯絡人:<姓名> / <email>
-    版本:v1 / <今天日期 YYYY-MM-DD>
-    狀態:進行中
-    變更摘要:首版提案
-
-更新既有案子:
-
-    【更新既有案子】
-    代號:<既有代號>
-    資料夾:D:\Dropbox\telluswork\client-previews\<既有代號>\
-    檔案清單:
-      - index.html        — <一行說明>
-      - wireframe.html    — <一行說明>
-    版本:v<新版號> / <今天日期 YYYY-MM-DD>
-    變更摘要:<相對前一版改了什麼,1–3 句條列>
-
-## 情況 B:檔案寫不進正式路徑,需要使用者手動搬
-
-新案子:
-
-    【上傳新案子・需手動搬檔】
-    代號:<案子代號>
-    搬遷指示:
-      從 <檔案 1 目前絕對路徑>
-      搬到 D:\Dropbox\telluswork\client-previews\<案子代號>\index.html
-
-      從 <檔案 2 目前絕對路徑>
-      搬到 D:\Dropbox\telluswork\client-previews\<案子代號>\wireframe.html
-
-      從 <檔案 3 目前絕對路徑>
-      搬到 D:\Dropbox\telluswork\client-previews\<案子代號>\mockup.html
-    檔案清單:
-      - index.html        — <一行說明>
-      - wireframe.html    — <一行說明>
-      - mockup.html       — <一行說明>
-    客戶名稱:<中文客戶名>
-    聯絡人:<姓名> / <email>
-    版本:v1 / <今天日期 YYYY-MM-DD>
-    狀態:進行中
-    變更摘要:首版提案
-
-更新既有案子的情況 B,結構同上,但開頭改成 `【更新既有案子・需手動搬檔】`,並省略「客戶名稱 / 聯絡人 / 狀態」欄,改填「版本」與「變更摘要」。
-
-請現在開始執行,從步驟 1 開始。
-````
+```yaml
+代號: muan
+類型: 更新            # 新案 / 更新
+客戶名稱: 沐恩動物醫院  # 新案必填;更新可省略
+聯絡人: 林文傑          # 新案必填;更新可省略
+email: jakelinvet@gmail.com
+版本: v1.2
+日期: 2026-05-21
+狀態: 進行中            # 新案用;更新可省略
+變更摘要:
+  - 修正首頁 banner 文案
+檔案說明:
+  index.html: 提案說明與導覽(落地頁)
+  wireframe.html: 可點擊的互動式 Wireframe 原型
+```

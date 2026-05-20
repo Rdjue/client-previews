@@ -58,6 +58,7 @@
 | 版本 | 日期 | 內容 |
 |------|------|------|
 | v1 | 2026-05-20 | 首版提案(提案說明 index.html + 互動式 wireframe.html),上線到 GitHub Pages |
+| v1.1 | 2026-05-20 | 客戶英文拼法 muen → muan 更正:案子代號改 muan、wireframe 頁首英文院名「MU-EN ANIMAL HOSPITAL」→「MUAN ANIMAL HOSPITAL」;提案文件內容無其他變動 |
 
 ## 待辦
 

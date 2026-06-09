@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PLAYZU 網站架構圖</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family:"Noto Sans TC",sans-serif; background:#f4f6f8; color:#1f2933; padding:24px; line-height:1.5; }
+  .sheet { max-width:1180px; margin:0 auto; background:#fff; padding:40px 48px; border-radius:10px; box-shadow:0 2px 14px rgba(0,0,0,.08); }
+  h1 { font-size:26px; color:#1a3c5e; border-bottom:3px solid #1a3c5e; padding-bottom:12px; }
+  .sub { color:#62707d; font-size:14px; margin-top:6px; }
+  .legend { display:flex; flex-wrap:wrap; gap:10px 18px; margin:22px 0 28px; padding:16px 18px; background:#f7f9fb; border-radius:8px; }
+  .legend .item { display:flex; align-items:center; font-size:13px; }
+  .dot { width:14px; height:14px; border-radius:3px; margin-right:7px; display:inline-block; }
+  .c-home{background:#1a3c5e;color:#fff;} .c-list{background:#2e7d9a;color:#fff;} .c-detail{background:#c0712b;color:#fff;}
+  .c-func{background:#6a8d3a;color:#fff;} .c-content{background:#7a5ea8;color:#fff;} .c-form{background:#b5485e;color:#fff;} .c-system{background:#6b7785;color:#fff;}
+  .b-home{background:#1a3c5e;} .b-list{background:#2e7d9a;} .b-detail{background:#c0712b;} .b-func{background:#6a8d3a;} .b-content{background:#7a5ea8;} .b-form{background:#b5485e;} .b-system{background:#6b7785;}
+  .node { display:inline-flex; align-items:center; gap:8px; padding:7px 13px; border-radius:7px; font-size:14.5px; font-weight:700; margin:3px 0; }
+  .tag { font-size:10.5px; font-weight:700; padding:2px 8px; border-radius:20px; color:#fff; white-space:nowrap; }
+  .note { font-size:12px; color:#62707d; font-weight:400; }
+  ul.branch { list-style:none; margin-left:24px; border-left:2px dashed #c7d0d9; padding-left:18px; }
+  ul.branch > li { position:relative; padding:3px 0; }
+  ul.branch > li::before { content:""; position:absolute; left:-20px; top:20px; width:16px; height:2px; background:#c7d0d9; }
+  .section-title { margin:34px 0 6px; font-size:17px; color:#1a3c5e; font-weight:900; }
+  .footer { margin-top:36px; font-size:12px; color:#8a96a3; border-top:1px solid #e4e9ee; padding-top:14px; }
+  @media (max-width:760px){ body{padding:14px;} .sheet{padding:24px 18px;} ul.branch{margin-left:14px;padding-left:12px;} }
+  @media print { body{background:#fff;padding:0;} .sheet{box-shadow:none;border-radius:0;} }
+</style>
+</head>
+<body>
+<div class="sheet">
+  <h1>PLAYZU 官方網站　網站架構圖（Sitemap）</h1>
+  <div class="sub">專案：www.playzu.com.tw 以 WordPress + WooCommerce 重製（單語系）　|　日期：2026/06/09　|　用途：頁面架構確認</div>
+
+  <div class="legend">
+    <div class="item"><span class="dot b-home"></span>首頁</div>
+    <div class="item"><span class="dot b-list"></span>列表頁（分類／彙整）</div>
+    <div class="item"><span class="dot b-detail"></span>明細頁（單筆內容）</div>
+    <div class="item"><span class="dot b-func"></span>功能頁（購物／會員）</div>
+    <div class="item"><span class="dot b-content"></span>內容頁（靜態介紹）</div>
+    <div class="item"><span class="dot b-form"></span>表單頁</div>
+    <div class="item"><span class="dot b-system"></span>系統／政策頁</div>
+  </div>
+
+  <div class="node c-home">首頁　<span class="tag b-home">首頁</span></div>
+
+  <!-- ===== 商品系列 ===== -->
+  <div class="section-title">A. 商品系列（Shop all）— 9 大分類 / 共 31 個子系列</div>
+  <div class="tree">
+    <span class="node c-list">商品系列（總覽）<span class="tag b-list">列表頁</span></span>
+    <ul class="branch">
+
+      <li><span class="node c-list">1. 歐美巧拼地毯<span class="tag b-list">分類列表頁</span></span>
+        <ul class="branch">
+          <li><span class="node c-list">花園系列<span class="tag b-list">列表頁</span></span></li>
+          <li><span class="node c-list">北歐風系列<span class="tag b-list">列表頁</span></span></li>
+          <li><span class="node c-list">摩洛哥系列<span class="tag b-list">列表頁</span></span></li>
+          <li><span class="node c-list">波斯花系列<span class="tag b-list">列表頁</span></span></li>
+          <li><span class="node c-list">復古系列<span class="tag b-list">列表頁</span></span></li>
+        </ul>
+      </li>
+
+      <li><span class="node c-list">2. 兒童巧拼地墊／寶寶爬行墊／遊戲地墊<span class="tag b-list">分類列表頁</span></span>
+        <ul class="branch">
+          <li><span class="node c-list">幾何系列<span class="tag b-list">列表頁</span></span></li>
+          <li><span class="node c-list">現代風系列<span class="tag b-list">列表頁</span></span></li>
+          <li><span class="node c-list">波爾卡系列<span class="tag b-list">列表頁</span></span></li>
+          <li><span class="node c-list">水磨石系列<span class="tag b-list">列表頁</span></span></li>
+        </ul>
+      </li>
+
+      <li><span class="node c-list">3. 止滑走道地毯地墊<span class="tag b-list">分類列表頁</span></span>
+        <ul class="branch">
+          <li><span class="node c-list">現代風系列<span class="tag b-list">列表頁</span></span></li>
+          <li><span class="node c-list">復古系列<span class="tag b-list">列表頁</span></span></li>
+          <li><span class="node c-list">花園系列<span class="tag b-list">列表頁</span></span></li>
+          <li><span class="node c-list">幾何系列<span class="tag b-list">列表頁</span></span></li>
+        </ul>
+      </li>
+
+      <li><span class="node c-list">4. 環保圓形皮革抗污止滑墊<span class="tag b-list">分類列表頁</span></span>
+        <ul class="branch">
+          <li><span class="node c-list">莫蘭迪系列<span class="tag b-list">列表頁</span></span></li>
+          <li><span class="node c-list">波希米亞系列<span class="tag b-list">列表頁</span></span></li>
+        </ul>
+      </li>
+
+      <li><span class="node c-list">5. 兒童教育玩具／育兒好物嚴選<span class="tag b-list">分類列表頁</span></span>
+        <ul class="branch">
+          <li><span class="node c-list">質感無毒抗菌搖搖馬<span class="tag b-list">列表頁</span></span></li>
+          <li><span class="node c-list">精美無毒玩具瑜珈球<span class="tag b-list">列表頁</span></span></li>
+          <li><span class="node c-list">精美迷你巧拼<span class="tag b-list">列表頁</span></span></li>
+          <li><span class="node c-list">德國 Sterntaler 安撫玩偶<span class="tag b-list">列表頁</span></span></li>
+        </ul>
+      </li>
+
+      <li><span class="node c-list">6. 加厚防水野餐墊<span class="tag b-list">分類列表頁</span></span>
+        <ul class="branch">
+          <li><span class="node c-list">波希米亞系列<span class="tag b-list">列表頁</span></span></li>
+        </ul>
+      </li>
+
+      <li><span class="node c-list">7. 裝飾皮革地墊（居家皮革地墊）<span class="tag b-list">分類列表頁</span></span>
+        <ul class="branch">
+          <li><span class="node c-list">莫蘭迪系列<span class="tag b-list">列表頁</span></span></li>
+        </ul>
+      </li>
+
+      <li><span class="node c-list">8. 創新材質限量體驗區<span class="tag b-list">分類列表頁</span></span>
+        <ul class="branch">
+          <li><span class="node c-list">莫蘭迪系列<span class="tag b-list">列表頁</span></span></li>
+          <li><span class="node c-list">歐美設計杯墊－波希米亞系列<span class="tag b-list">列表頁</span></span></li>
+        </ul>
+      </li>
+
+      <li><span class="node c-list">9. 精選優惠品／其他<span class="tag b-list">分類列表頁</span></span>
+        <ul class="branch">
+          <li><span class="node c-list">產品體驗<span class="tag b-list">列表頁</span></span></li>
+          <li><span class="node c-list">專屬賣場<span class="tag b-list">列表頁</span></span></li>
+          <li><span class="node c-list">超值福利品出清<span class="tag b-list">列表頁</span></span></li>
+          <li><span class="node c-list">社團專屬 1 元禮<span class="tag b-list">列表頁</span></span></li>
+          <li><span class="node c-list">運費代收<span class="tag b-list">列表頁</span></span></li>
+        </ul>
+      </li>
+
+      <li><span class="node c-list">特價商品（Sale）<span class="tag b-list">分類列表頁</span></span></li>
+
+      <li><span class="node c-detail">單一商品頁<span class="tag b-detail">明細頁</span></span>
+        <span class="note">　★重點：價格呈現＋購物動線；含規格(變體)選擇、商品評價、推薦商品</span>
+      </li>
+    </ul>
+  </div>
+
+  <!-- ===== 設計師系列 ===== -->
+  <div class="section-title">B. 設計師系列（依風格瀏覽）— 11 個系列</div>
+  <div class="tree">
+    <span class="node c-list">設計師系列（總覽）<span class="tag b-list">列表頁</span></span>
+    <ul class="branch">
+      <li><span class="node c-list">復古系列 Vintage<span class="tag b-list">列表頁</span></span></li>
+      <li><span class="node c-list">摩洛哥系列 Moroccan<span class="tag b-list">列表頁</span></span></li>
+      <li><span class="node c-list">波斯花系列 Persian<span class="tag b-list">列表頁</span></span></li>
+      <li><span class="node c-list">水磨石系列 Terrazzo<span class="tag b-list">列表頁</span></span></li>
+      <li><span class="node c-list">波爾卡系列 Polka Dot<span class="tag b-list">列表頁</span></span></li>
+      <li><span class="node c-list">北歐風系列 Nordic<span class="tag b-list">列表頁</span></span></li>
+      <li><span class="node c-list">現代風系列 Modern<span class="tag b-list">列表頁</span></span></li>
+      <li><span class="node c-list">幾何系列 Geometric<span class="tag b-list">列表頁</span></span></li>
+      <li><span class="node c-list">花園系列 Flower Garden<span class="tag b-list">列表頁</span></span></li>
+      <li><span class="node c-list">波希米亞系列 Bohemian<span class="tag b-list">列表頁</span></span></li>
+      <li><span class="node c-list">莫蘭迪系列 Morandi<span class="tag b-list">列表頁</span></span></li>
+    </ul>
+  </div>
+
+  <!-- ===== 會員 / 購物 ===== -->
+  <div class="section-title">C. 會員與購物流程</div>
+  <div class="tree">
+    <ul class="branch" style="border-left:none;margin-left:0;padding-left:0;">
+      <li><span class="node c-func">會員登入<span class="tag b-func">功能頁</span></span></li>
+      <li><span class="node c-func">會員註冊<span class="tag b-func">功能頁</span></span></li>
+      <li><span class="node c-func">會員中心（訂單查詢／個人資料）<span class="tag b-func">功能頁</span></span></li>
+      <li><span class="node c-func">購物車<span class="tag b-func">功能頁</span></span>
+        <ul class="branch">
+          <li><span class="node c-func">結帳（金流）<span class="tag b-func">功能頁</span></span></li>
+          <li><span class="node c-system">訂單完成／付款結果<span class="tag b-system">系統頁</span></span></li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+
+  <!-- ===== 電子雜誌 ===== -->
+  <div class="section-title">D. 電子雜誌（部落格）— 5 個分類</div>
+  <div class="tree">
+    <span class="node c-list">電子雜誌（總覽）<span class="tag b-list">列表頁</span></span>
+    <ul class="branch">
+      <li><span class="node c-list">嬰幼童防護<span class="tag b-list">分類列表頁</span></span></li>
+      <li><span class="node c-list">巧拼、地墊知識<span class="tag b-list">分類列表頁</span></span></li>
+      <li><span class="node c-list">野餐露營<span class="tag b-list">分類列表頁</span></span></li>
+      <li><span class="node c-list">生活知識<span class="tag b-list">分類列表頁</span></span></li>
+      <li><span class="node c-list">居家設計<span class="tag b-list">分類列表頁</span></span></li>
+      <li><span class="node c-detail">文章內頁<span class="tag b-detail">明細頁</span></span>
+        <span class="note">　★需求：作者名稱＋快速連結目錄（自動 TOC）</span>
+      </li>
+    </ul>
+  </div>
+
+  <!-- ===== 品牌與服務內容 ===== -->
+  <div class="section-title">E. 品牌與服務內容</div>
+  <div class="tree">
+    <ul class="branch" style="border-left:none;margin-left:0;padding-left:0;">
+      <li><span class="node c-content">品牌故事<span class="tag b-content">內容頁</span></span></li>
+      <li><span class="node c-content">認識產品<span class="tag b-content">內容頁</span></span></li>
+      <li><span class="node c-content">組裝說明<span class="tag b-content">內容頁</span></span></li>
+      <li><span class="node c-content">認證檢驗<span class="tag b-content">內容頁</span></span></li>
+      <li><span class="node c-content">常見 Q&amp;A（FAQ）<span class="tag b-content">內容頁</span></span></li>
+      <li><span class="node c-content">主題佈置企劃（Workshops）<span class="tag b-content">內容頁</span></span></li>
+      <li><span class="node c-list">客戶好評<span class="tag b-list">列表頁</span></span></li>
+      <li><span class="node c-list">門市據點<span class="tag b-list">列表頁</span></span></li>
+      <li><span class="node c-form">聯絡我們<span class="tag b-form">表單頁</span></span></li>
+    </ul>
+  </div>
+
+  <!-- ===== 政策頁 ===== -->
+  <div class="section-title">F. 政策／系統頁</div>
+  <div class="tree">
+    <ul class="branch" style="border-left:none;margin-left:0;padding-left:0;">
+      <li><span class="node c-system">隱私權政策<span class="tag b-system">系統頁</span></span></li>
+      <li><span class="node c-system">退換貨條款<span class="tag b-system">系統頁</span></span></li>
+      <li><span class="node c-system">運送說明 / 會員條款<span class="tag b-system">系統頁</span></span></li>
+    </ul>
+  </div>
+
+  <div class="section-title">頁面類別說明</div>
+  <ul style="margin-left:20px; font-size:14px;">
+    <li><b>列表頁</b>：呈現多筆項目供瀏覽／點擊（商品分類、子系列、文章列表、門市、好評）。</li>
+    <li><b>明細頁</b>：呈現單一項目完整內容（單一商品、單篇文章）。</li>
+    <li><b>功能頁</b>：互動式交易與帳號功能（登入、註冊、會員中心、購物車、結帳）。</li>
+    <li><b>內容頁</b>：以圖文介紹為主的靜態頁（品牌故事、認識產品、組裝說明、FAQ 等）。</li>
+    <li><b>表單頁</b>：以填寫表單為主（聯絡我們）。</li>
+    <li><b>系統／政策頁</b>：流程結果或法務／規範類頁面。</li>
+  </ul>
+
+  <div class="footer">
+    說明：本架構圖依 www.playzu.com.tw 實際主選單與分類繪製，供確認頁面範圍與分類。★ 標記為本次特別需求項目。確認後將據此進行設計與開發。
+  </div>
+</div>
+</body>
+</html>

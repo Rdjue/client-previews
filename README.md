@@ -16,7 +16,7 @@ https://rdjue.github.io/client-previews/<案子代號>/
 | `shenhe` | 深河出版(舊代號) | — | [跳轉](https://rdjue.github.io/client-previews/shenhe/) | v5 / 2026-06-02 | 已遷移 → `deepriver` |
 | `muan` | 沐恩動物醫院 | 林文傑<br>jakelinvet@gmail.com | [前往](https://rdjue.github.io/client-previews/muan/) | v1.1 / 2026-05-20 | 進行中 |
 | `playzu` | PLAYZU 歐美設計地墊 | Yuna(我方)<br>yuna@tellustek.com | [前往](https://rdjue.github.io/client-previews/playzu/) | v1 / 2026-06-09 | 進行中 |
-| `sinopacbiz` | 永豐期貨 綜合業務部 | 林世鴻<br>(LINE 聯絡) | [前往](https://rdjue.github.io/client-previews/sinopacbiz/) | v1.1 / 2026-07-27 | 進行中 |
+| `sinopacbiz` | 永豐期貨 綜合業務部 | 林世鴻<br>(LINE 聯絡) | [前往](https://rdjue.github.io/client-previews/sinopacbiz/) | v2 / 2026-08-03 | 進行中 |
 
 ## 加入新案子
 
